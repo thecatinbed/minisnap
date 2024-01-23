@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mm/catkin_ws/src/Utils/pose_utils/include/pose_utils.h
+iostream
+-
+armadillo
+/home/mm/catkin_ws/src/Utils/pose_utils/include/armadillo
+
+/home/mm/catkin_ws/src/Utils/pose_utils/src/pose_utils.cpp
+pose_utils.h
+/home/mm/catkin_ws/src/Utils/pose_utils/src/pose_utils.h
+
