@@ -139,11 +139,12 @@
 /home/mm/catkin_ws/build/minisnap/CMakeFiles/planner.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/install/strip.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/install/local.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/edit_cache.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/test.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/install.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/list_install_components.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/rebuild_cache.dir
-/home/mm/catkin_ws/build/a_star/CMakeFiles/edit_cache.dir
-/home/mm/catkin_ws/build/a_star/CMakeFiles/test.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/pub_point_node.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/astar_node.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/install/strip.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/install/local.dir

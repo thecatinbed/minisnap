@@ -376,6 +376,7 @@ Utils/waypoint_generator/clean: Utils/waypoint_generator/CMakeFiles/waypoint_gen
 # Directory level rules for directory a_star
 
 # Recursive "all" directory target.
+a_star/all: a_star/CMakeFiles/pub_point_node.dir/all
 a_star/all: a_star/CMakeFiles/astar_node.dir/all
 
 .PHONY : a_star/all
@@ -386,6 +387,7 @@ a_star/preinstall:
 .PHONY : a_star/preinstall
 
 # Recursive "clean" directory target.
+a_star/clean: a_star/CMakeFiles/pub_point_node.dir/clean
 a_star/clean: a_star/CMakeFiles/astar_node.dir/clean
 
 .PHONY : a_star/clean
@@ -1305,12 +1307,12 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/all: U
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/all: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory.dir/all
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=51,52,53,54,55,56,57,58,59,60,61 "Built target quadrotor_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=51,52,53,54,55,56,57,58,59,60,61,62 "Built target quadrotor_msgs_generate_messages_lisp"
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_lisp.dir/rule
@@ -1337,7 +1339,7 @@ Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/all: Utils/quadrotor_msgs/CMakeF
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 13
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/rule
@@ -1384,12 +1386,12 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/all: Ut
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/all: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory.dir/all
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=39,40,41,42,43,44,45,46,47,48,49,50 "Built target quadrotor_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=40,41,42,43,44,45,46,47,48,49,50 "Built target quadrotor_msgs_generate_messages_eus"
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_eus.dir/rule
@@ -1517,12 +1519,12 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/all: Ut
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/all: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory.dir/all
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38 "Built target quadrotor_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38,39 "Built target quadrotor_msgs_generate_messages_cpp"
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_cpp.dir/rule
@@ -2039,7 +2041,7 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_genlisp.dir/all: Utils/quadrotor_
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_genlisp.dir/rule
@@ -2066,7 +2068,7 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gencpp.dir/all: Utils/quadrotor_m
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gencpp.dir/rule
@@ -2390,7 +2392,7 @@ Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all: Utils/quadrotor_msgs/CMakeF
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 13
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/rule
@@ -2437,12 +2439,12 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/all:
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/all: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory.dir/all
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/build.make Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=62,63,64,65,66,67,68,69,70,71,72,73 "Built target quadrotor_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=63,64,65,66,67,68,69,70,71,72,73 "Built target quadrotor_msgs_generate_messages_nodejs"
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_generate_messages_nodejs.dir/rule
@@ -2469,7 +2471,7 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_geneus.dir/all: Utils/quadrotor_m
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_geneus.dir/rule
@@ -2658,7 +2660,7 @@ Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gennodejs.dir/all: Utils/quadroto
 
 # Build rule for subdir invocation for target.
 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/quadrotor_msgs/CMakeFiles/quadrotor_msgs_gennodejs.dir/rule
@@ -2767,7 +2769,7 @@ minisnap/CMakeFiles/PID_tuning.dir/all: Utils/quadrotor_msgs/CMakeFiles/encode_m
 
 # Build rule for subdir invocation for target.
 minisnap/CMakeFiles/PID_tuning.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/PID_tuning.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : minisnap/CMakeFiles/PID_tuning.dir/rule
@@ -2893,7 +2895,7 @@ minisnap/CMakeFiles/circle_example.dir/all: Utils/quadrotor_msgs/CMakeFiles/enco
 
 # Build rule for subdir invocation for target.
 minisnap/CMakeFiles/circle_example.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 15
 	$(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/circle_example.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : minisnap/CMakeFiles/circle_example.dir/rule
@@ -2999,6 +3001,34 @@ planner: minisnap/CMakeFiles/planner.dir/rule
 minisnap/CMakeFiles/planner.dir/clean:
 	$(MAKE) -f minisnap/CMakeFiles/planner.dir/build.make minisnap/CMakeFiles/planner.dir/clean
 .PHONY : minisnap/CMakeFiles/planner.dir/clean
+
+#=============================================================================
+# Target rules for target a_star/CMakeFiles/pub_point_node.dir
+
+# All Build rule for target.
+a_star/CMakeFiles/pub_point_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/all
+a_star/CMakeFiles/pub_point_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all
+	$(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/depend
+	$(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=24 "Built target pub_point_node"
+.PHONY : a_star/CMakeFiles/pub_point_node.dir/all
+
+# Build rule for subdir invocation for target.
+a_star/CMakeFiles/pub_point_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 15
+	$(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/pub_point_node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
+.PHONY : a_star/CMakeFiles/pub_point_node.dir/rule
+
+# Convenience name for target.
+pub_point_node: a_star/CMakeFiles/pub_point_node.dir/rule
+
+.PHONY : pub_point_node
+
+# clean rule for target.
+a_star/CMakeFiles/pub_point_node.dir/clean:
+	$(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/clean
+.PHONY : a_star/CMakeFiles/pub_point_node.dir/clean
 
 #=============================================================================
 # Target rules for target a_star/CMakeFiles/astar_node.dir
@@ -3665,7 +3695,7 @@ Utils/odom_visualization/CMakeFiles/odom_visualization.dir/all: Utils/quadrotor_
 
 # Build rule for subdir invocation for target.
 Utils/odom_visualization/CMakeFiles/odom_visualization.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 16
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/odom_visualization/CMakeFiles/odom_visualization.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/odom_visualization/CMakeFiles/odom_visualization.dir/rule
@@ -3967,12 +3997,12 @@ Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/all:
 Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/all: Utils/multi_map_server/CMakeFiles/_multi_map_server_generate_messages_check_deps_VerticalOccupancyGridList.dir/all
 	$(MAKE) -f Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/build.make Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/depend
 	$(MAKE) -f Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/build.make Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=18,19,20 "Built target multi_map_server_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=18,19 "Built target multi_map_server_generate_messages_py"
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages_py.dir/rule
@@ -4050,12 +4080,12 @@ Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/all: Utils/quadrot
 Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/all: Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all
 	$(MAKE) -f Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/build.make Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/depend
 	$(MAKE) -f Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/build.make Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num= "Built target multi_map_visualization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=20 "Built target multi_map_visualization"
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/all
 
 # Build rule for subdir invocation for target.
 Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 16
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_visualization.dir/rule
@@ -4086,7 +4116,7 @@ Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages.dir/all: Ut
 
 # Build rule for subdir invocation for target.
 Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_server_generate_messages.dir/rule
@@ -4258,7 +4288,7 @@ Utils/multi_map_server/CMakeFiles/multi_map_server_genpy.dir/all: Utils/multi_ma
 
 # Build rule for subdir invocation for target.
 Utils/multi_map_server/CMakeFiles/multi_map_server_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/multi_map_server/CMakeFiles/multi_map_server_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/multi_map_server/CMakeFiles/multi_map_server_genpy.dir/rule
@@ -4882,7 +4912,7 @@ px4ctrl/CMakeFiles/px4ctrl_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/decode_
 px4ctrl/CMakeFiles/px4ctrl_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all
 	$(MAKE) -f px4ctrl/CMakeFiles/px4ctrl_node.dir/build.make px4ctrl/CMakeFiles/px4ctrl_node.dir/depend
 	$(MAKE) -f px4ctrl/CMakeFiles/px4ctrl_node.dir/build.make px4ctrl/CMakeFiles/px4ctrl_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=25,26,27 "Built target px4ctrl_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=26,27 "Built target px4ctrl_node"
 .PHONY : px4ctrl/CMakeFiles/px4ctrl_node.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5152,7 +5182,7 @@ px4ctrl/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/clean:
 px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/all:
 	$(MAKE) -f px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/build.make px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/depend
 	$(MAKE) -f px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/build.make px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=24 "Built target px4ctrl_gencfg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mm/catkin_ws/build/CMakeFiles --progress-num=25 "Built target px4ctrl_gencfg"
 .PHONY : px4ctrl/CMakeFiles/px4ctrl_gencfg.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5510,7 +5540,7 @@ Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/all: Utils/multi_map_server/CMake
 
 # Build rule for subdir invocation for target.
 Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 23
 	$(MAKE) -f CMakeFiles/Makefile2 Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/rule

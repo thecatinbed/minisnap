@@ -1247,6 +1247,19 @@ planner/fast:
 .PHONY : planner/fast
 
 #=============================================================================
+# Target rules for targets named pub_point_node
+
+# Build rule for target.
+pub_point_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pub_point_node
+.PHONY : pub_point_node
+
+# fast build rule for target.
+pub_point_node/fast:
+	$(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
+.PHONY : pub_point_node/fast
+
+#=============================================================================
 # Target rules for targets named astar_node
 
 # Build rule for target.
@@ -2551,6 +2564,7 @@ help:
 	@echo "... circle_example"
 	@echo "... trajectory_generator"
 	@echo "... planner"
+	@echo "... pub_point_node"
 	@echo "... astar_node"
 	@echo "... tf_generate_messages_py"
 	@echo "... actionlib_generate_messages_py"

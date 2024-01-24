@@ -43,7 +43,7 @@ class planner
         Eigen::Vector3d getJerkPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;
         std::vector<quadrotor_msgs::PositionCommand> get_trajectory(void);
         void tra_publish(void);
-        void draw_desire_trajectory(void);
+        void draw_desire_trajectory(ros::Publisher despath_pub);
 };
 
 // #endif

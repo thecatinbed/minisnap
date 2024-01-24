@@ -505,6 +505,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "minisnap/CMakeFiles/circle_example.dir/DependInfo.cmake"
   "minisnap/CMakeFiles/trajectory_generator.dir/DependInfo.cmake"
   "minisnap/CMakeFiles/planner.dir/DependInfo.cmake"
+  "a_star/CMakeFiles/pub_point_node.dir/DependInfo.cmake"
   "a_star/CMakeFiles/astar_node.dir/DependInfo.cmake"
   "Utils/odom_visualization/CMakeFiles/tf_generate_messages_py.dir/DependInfo.cmake"
   "Utils/odom_visualization/CMakeFiles/actionlib_generate_messages_py.dir/DependInfo.cmake"

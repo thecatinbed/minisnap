@@ -248,11 +248,12 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
     ros::Rate rate(100);
     ros::Time cur_time = ros::Time::now();
     trajectory.header.stamp = cur_time;
-
+    //cout << "time_size:" << time_everytraj.size()<< endl;
     for (int i = 0; i < time_everytraj.size(); i++) 
     {
-        // cout << "time:" << time(i) << endl;
+        
         offset.fromSec(time_everytraj(i));
+        //cout << "time(i):" << time_everytraj(i)<< endl;
         for (double t = 0.0; t < time_everytraj(i); t += 0.01) 
         {
             
@@ -281,7 +282,7 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
             trajectory.yaw_dot = 0;
             //将轨迹压入到容器当中
             //tra_generation_pub.publish(trajectory);
-            cout << trajectory << endl;
+            //cout << trajectory << endl;
             trajectory_vector.push_back(trajectory);
         }
         trajectory.header.stamp = trajectory.header.stamp + offset;
@@ -293,12 +294,12 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
     //return trajectory;              //  返回产生的 path 信息
     return trajectory_vector;
 }
-void planner::draw_desire_trajectory(void){
+void planner::draw_desire_trajectory(ros::Publisher despath_pub){
     static nav_msgs::Path desire_path;
     geometry_msgs::PoseStamped pose;
     Vector3d pos_;
     ROS_INFO("Drawing desire trajectory.");
-    ros::Publisher despath_pub = n.advertise<nav_msgs::Path>("/desire_trajectory", 10, true);
+    //ros::Publisher despath_pub = n.advertise<nav_msgs::Path>("/desire_trajectory", 10, true);
     ros::Duration(2.0).sleep();
     
     desire_path.header.frame_id = "world";

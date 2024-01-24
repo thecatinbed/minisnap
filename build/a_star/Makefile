@@ -80,6 +80,28 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -113,28 +135,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
 	cd /home/mm/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles /home/mm/catkin_ws/build/a_star/CMakeFiles/progress.marks
@@ -166,6 +166,21 @@ preinstall/fast:
 depend:
 	cd /home/mm/catkin_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+a_star/CMakeFiles/pub_point_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/pub_point_node.dir/rule
+.PHONY : a_star/CMakeFiles/pub_point_node.dir/rule
+
+# Convenience name for target.
+pub_point_node: a_star/CMakeFiles/pub_point_node.dir/rule
+
+.PHONY : pub_point_node
+
+# fast build rule for target.
+pub_point_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
+.PHONY : pub_point_node/fast
 
 # Convenience name for target.
 a_star/CMakeFiles/astar_node.dir/rule:
@@ -209,6 +224,33 @@ src/astar_node.cpp.s:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.s
 .PHONY : src/astar_node.cpp.s
 
+src/pub_point_node.o: src/pub_point_node.cpp.o
+
+.PHONY : src/pub_point_node.o
+
+# target to build an object file
+src/pub_point_node.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/src/pub_point_node.cpp.o
+.PHONY : src/pub_point_node.cpp.o
+
+src/pub_point_node.i: src/pub_point_node.cpp.i
+
+.PHONY : src/pub_point_node.i
+
+# target to preprocess a source file
+src/pub_point_node.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/src/pub_point_node.cpp.i
+.PHONY : src/pub_point_node.cpp.i
+
+src/pub_point_node.s: src/pub_point_node.cpp.s
+
+.PHONY : src/pub_point_node.s
+
+# target to generate assembly for a file
+src/pub_point_node.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/src/pub_point_node.cpp.s
+.PHONY : src/pub_point_node.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -217,15 +259,19 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... test"
+	@echo "... pub_point_node"
 	@echo "... astar_node"
 	@echo "... src/astar_node.o"
 	@echo "... src/astar_node.i"
 	@echo "... src/astar_node.s"
+	@echo "... src/pub_point_node.o"
+	@echo "... src/pub_point_node.i"
+	@echo "... src/pub_point_node.s"
 .PHONY : help
 
 

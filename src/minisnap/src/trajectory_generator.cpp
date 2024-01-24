@@ -3,7 +3,7 @@
 */
 #include "minisnap/trajectory_generator.h"
 #include <iostream>
-
+#include "minisnap/planner.h"
 using namespace std;
 using namespace Eigen;
 
@@ -44,7 +44,7 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
 {
 
     const int p_order = 2 * order - 1;//多项式的最高次数 p^(p_order)t^(p_order) + ...
-    const int p_num1d = 2 * order;//每一段轨迹的变量个数，对于五阶多项式为：p5, p4, ... p0
+    const int p_num1d = 2*order;//每一段轨迹的变量个数，对于五阶多项式为：p5, p4, ... p0
 
     const int number_segments = Time.size();
     //每一段都有x,y,z三个方向，每一段多项式的系数的个数有3*p_num1d
@@ -64,12 +64,12 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
 
         for (int j = 0; j < order; ++j)    //  0 ~ 3;
         {
-            for (int k = 0; k < p_num1d; ++k)    //  0 ~ 7;
+            for (int k = 0; k < p_num1d; ++k)    //  0 ~ 5;
             {
-                if (k < j)     //  低次项求导后可能为0；
+                if (k < j)     //  col列 < row行 ,  都是 0 ；
                     continue;
 
-                sub_M(j, p_num1d - 1 - k) = Factorial(k) / Factorial(k - j) * pow(0, k - j);   //计算幂，从右至左次数升高
+                sub_M(j, p_num1d - 1 - k) = Factorial(k) / Factorial(k - j) * pow(0, k - j);   //计算幂
                 sub_M(j + order, p_num1d - 1 - k) = Factorial(k) / Factorial(k - j) * pow(Time(i), k - j);
             }
         }
@@ -78,8 +78,8 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
     }
 
     //构造选择矩阵C的过程非常复杂，但是只要多花点时间探索一些规律，举几个例子，应该是能写出来的!!
-    const int number_valid_variables = (number_segments + 1) * order;    // 有效约束个数  ， 每个点有4个约束， dm+dp;
-    const int number_fixed_variables = 2 * order + (number_segments - 1);     //固定约束的个数，起始点和终点各4个约束加上中间点各1个约束
+    const int number_valid_variables = (number_segments + 1) * order;    // 有效约束个数  ，dm+dp;
+    const int number_fixed_variables = 2 * order + (number_segments - 1);     //固定约束的个数
     //C_T：选择矩阵，用于分离未知量和已知量，0 和 1 组成的矩阵
 
     MatrixXd C_T = MatrixXd::Zero(number_coefficients, number_valid_variables);  // number_coefficients = p_num1d * number_segments;   总的系数个数
@@ -112,22 +112,23 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
             continue;
         }
 
-        if ((i % order != 0) && (i / order % 2 == 1))     // 不是 4 的倍数 ， 并且        i = 5 / 6 / 7 ; 13 / 14 / 15 ......中间段末尾的 v , a , jerk ;
+        if ((i % order != 0) && (i / order % 2 == 1))     // 不是 4 的倍数 ， 并且         i = 5 / 6 / 7 ; 13 / 14 / 15 ......中间段末尾的 v , a , jerk ;
         {
-            const int temp_index_0 = i / (2 * order) * (2 * order) + order + 1;
-            const int temp_index_1 = (i / (2 * order) * (order - 1)) + (i - temp_index_0);
+            const int temp_index_0 = i / (2 * order) * (2 * order) + order;
+            const int temp_index_1 = i / (2 * order) * (order - 1) + i - temp_index_0 - 1;
             C_T(i, number_fixed_variables + temp_index_1) = 1;
             continue;
         }
 
         if ((i % order != 0) && (i / order % 2 == 0)) 
         {
-            const int temp_index_0 = (i - order) / (2 * order) * (2 * order) + order + 1;
-            const int temp_index_1 = ((i - order) / (2 * order) * (order - 1)) + ((i - order) - temp_index_0);
+            const int temp_index_0 = (i - order) / (2 * order) * (2 * order) + order;
+            const int temp_index_1 = (i - order) / (2 * order) * (order - 1) + (i - order) - temp_index_0 - 1;
             C_T(i, number_fixed_variables + temp_index_1) = 1;
             continue;
         }
     }
+
     // Q：二项式的系数矩阵   ;     总的代价函数 J = (P_T)QP
     MatrixXd Q = MatrixXd::Zero(number_coefficients, number_coefficients);
     for (int k = 0; k < number_segments; ++k) 
@@ -152,13 +153,14 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
     }
 
     MatrixXd R = C_T.transpose() * M.transpose().inverse() * Q * M.inverse() * C_T;        //       M 矩阵就是 A 矩阵；
-    // 把微分约束整理为一个向量；
+
+    // 把固定好的约束整理放到一个向量中；
     for (int axis = 0; axis < 3; ++axis)    // 三个坐标轴
     {
         VectorXd d_selected = VectorXd::Zero(number_valid_variables);
         for (int i = 0; i < number_coefficients; ++i) 
         {
-            if (i == 0)                         //起点的四个约束，jerk默认为0
+            if (i == 0) 
             {
                 d_selected(i) = Path(0, axis);
                 continue;
@@ -176,15 +178,15 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
                 continue;
             }
 
-            if (i == number_coefficients - order + 2 && order >= 3) //终点的四个约束，jerk默认为0
+            if (i == number_coefficients - order + 2 && order >= 3) 
             {
-                d_selected(number_fixed_variables - order + 2) = Acc(number_segments, axis);//Acc(1, axis);
+                d_selected(number_fixed_variables - order + 2) = Acc(1, axis);
                 continue;
             }
 
             if (i == number_coefficients - order + 1 && order >= 2) 
             {
-                d_selected(number_fixed_variables - order + 1) = Vel(number_segments, axis);//Vel(1, axis);
+                d_selected(number_fixed_variables - order + 1) = Vel(1, axis);
                 continue;
             }
 
@@ -194,13 +196,14 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
                 continue;
             }
 
-            if ((i % order == 0) && (i / order % 2 == 0)) //中间点的位置约束
+            if ((i % order == 0) && (i / order % 2 == 0)) 
             {
                 const int index = i / (2 * order) + order - 1;
                 d_selected(index) = Path(i / (2 * order), axis);
                 continue;
             }
         }
+
         MatrixXd R_PP = R.block(number_fixed_variables, number_fixed_variables,
                                 number_valid_variables - number_fixed_variables,
                                 number_valid_variables - number_fixed_variables);
@@ -248,7 +251,7 @@ Eigen::MatrixXd TrajectoryGeneratorTool::SolveQPClosedForm(
             }
         }
     }
-    //std::cout << PolyCoeff<<std::endl;              // 打印参数矩阵
+    // std::cout << PolyCoeff<<std::endl;              // 打印参数矩阵
     return PolyCoeff;
 }
 

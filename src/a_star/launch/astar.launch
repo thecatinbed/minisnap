@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find minisnap)/launch/planner.rviz" required="true"/>
+  <!--<node pkg="rviz" type="rviz" name="rviz" args="-d $(find minisnap)/launch/planner.rviz" required="true"/-->
   <node pkg="a_star" name="astar_node" type="astar_node" output="screen"/>
   	<!--<rosparam file="$(find minisnap)/poses/config.yaml"/>-->
   <!-- <node name="rviz" pkg="rviz" type="rviz" output="screen"/> -->

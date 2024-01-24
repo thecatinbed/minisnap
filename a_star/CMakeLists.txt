@@ -133,6 +133,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(astar_node src/astar_node.cpp)
+add_executable(pub_point_node src/pub_point_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,6 +149,9 @@ add_executable(astar_node src/astar_node.cpp)
 target_link_libraries(astar_node
   planner
   trajectory_generator
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(pub_point_node
   ${catkin_LIBRARIES}
 )
 

@@ -28,6 +28,7 @@ int main(int argc, char** argv){
 	ros::Publisher tra_generation_pub = nh.advertise<quadrotor_msgs::PositionCommand>("/planning/pos_cmd", 10); 
     ros::Publisher real_trajectory_pub = nh.advertise<nav_msgs::Path>("/real_trajectory", 10, true); 
     ros::Publisher goal_point_pub = nh.advertise<geometry_msgs::PointStamped>("/goal_point", 10, true);
+    ros::Publisher despath_pub = nh.advertise<nav_msgs::Path>("/desire_trajectory", 10, true);
     ros::Subscriber pose_sub = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, pose_cb);
     ros::Subscriber clickedpoint_sub = nh.subscribe<geometry_msgs::PoseStamped>("/goal", 1, clicked_cb);
     ros::Rate rate(100);  //设置轨迹发布频率
@@ -66,7 +67,7 @@ int main(int argc, char** argv){
                 ROS_INFO("after print");
                 myplanner.poly_coeff = myplanner.getcoeff();//获得轨迹的多项式矩阵
                 tra = myplanner.get_trajectory();//将轨迹离散化得到控制命令
-                myplanner.draw_desire_trajectory();//可视化期望轨迹
+                myplanner.draw_desire_trajectory(despath_pub);//可视化期望轨迹
             }
         }
         if(start_plan){

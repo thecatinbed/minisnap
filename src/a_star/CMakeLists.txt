@@ -11,8 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  quadrotor_msgs
   minisnap
+  quadrotor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,8 +107,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES a_star
-#   CATKIN_DEPENDS roscpp rospy std_msgs minisnap 
-#  DEPENDS system_libs
+#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  DEPENDS system_lib
 )
 
 ###########
@@ -118,11 +118,14 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  #include
+# include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/a_star.cpp
+# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -132,8 +135,9 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+# add_executable(${PROJECT_NAME}_node src/a_star_node.cpp)
 add_executable(astar_node src/astar_node.cpp)
-
+add_executable(pub_point_node src/pub_point_node.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -145,12 +149,11 @@ add_executable(astar_node src/astar_node.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(astar_node
-  planner
-  trajectory_generator
-  ${catkin_LIBRARIES}
-)
-
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
+target_link_libraries(astar_node planner trajectory_generator ${catkin_LIBRARIES})
+target_link_libraries(pub_point_node ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
