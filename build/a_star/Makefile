@@ -168,19 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-a_star/CMakeFiles/pub_point_node.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/pub_point_node.dir/rule
-.PHONY : a_star/CMakeFiles/pub_point_node.dir/rule
+a_star/CMakeFiles/keyboard_input_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/keyboard_input_node.dir/rule
+.PHONY : a_star/CMakeFiles/keyboard_input_node.dir/rule
 
 # Convenience name for target.
-pub_point_node: a_star/CMakeFiles/pub_point_node.dir/rule
+keyboard_input_node: a_star/CMakeFiles/keyboard_input_node.dir/rule
 
-.PHONY : pub_point_node
+.PHONY : keyboard_input_node
 
 # fast build rule for target.
-pub_point_node/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
-.PHONY : pub_point_node/fast
+keyboard_input_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/keyboard_input_node.dir/build.make a_star/CMakeFiles/keyboard_input_node.dir/build
+.PHONY : keyboard_input_node/fast
 
 # Convenience name for target.
 a_star/CMakeFiles/astar_node.dir/rule:
@@ -196,6 +196,78 @@ astar_node: a_star/CMakeFiles/astar_node.dir/rule
 astar_node/fast:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/build
 .PHONY : astar_node/fast
+
+# Convenience name for target.
+a_star/CMakeFiles/pub_point_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/pub_point_node.dir/rule
+.PHONY : a_star/CMakeFiles/pub_point_node.dir/rule
+
+# Convenience name for target.
+pub_point_node: a_star/CMakeFiles/pub_point_node.dir/rule
+
+.PHONY : pub_point_node
+
+# fast build rule for target.
+pub_point_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
+.PHONY : pub_point_node/fast
+
+# Convenience name for target.
+a_star/CMakeFiles/minisnap_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/minisnap_node.dir/rule
+.PHONY : a_star/CMakeFiles/minisnap_node.dir/rule
+
+# Convenience name for target.
+minisnap_node: a_star/CMakeFiles/minisnap_node.dir/rule
+
+.PHONY : minisnap_node
+
+# fast build rule for target.
+minisnap_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/build
+.PHONY : minisnap_node/fast
+
+# Convenience name for target.
+a_star/CMakeFiles/Astar_searcher.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/Astar_searcher.dir/rule
+.PHONY : a_star/CMakeFiles/Astar_searcher.dir/rule
+
+# Convenience name for target.
+Astar_searcher: a_star/CMakeFiles/Astar_searcher.dir/rule
+
+.PHONY : Astar_searcher
+
+# fast build rule for target.
+Astar_searcher/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/Astar_searcher.dir/build.make a_star/CMakeFiles/Astar_searcher.dir/build
+.PHONY : Astar_searcher/fast
+
+src/Astar_searcher.o: src/Astar_searcher.cpp.o
+
+.PHONY : src/Astar_searcher.o
+
+# target to build an object file
+src/Astar_searcher.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/Astar_searcher.dir/build.make a_star/CMakeFiles/Astar_searcher.dir/src/Astar_searcher.cpp.o
+.PHONY : src/Astar_searcher.cpp.o
+
+src/Astar_searcher.i: src/Astar_searcher.cpp.i
+
+.PHONY : src/Astar_searcher.i
+
+# target to preprocess a source file
+src/Astar_searcher.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/Astar_searcher.dir/build.make a_star/CMakeFiles/Astar_searcher.dir/src/Astar_searcher.cpp.i
+.PHONY : src/Astar_searcher.cpp.i
+
+src/Astar_searcher.s: src/Astar_searcher.cpp.s
+
+.PHONY : src/Astar_searcher.s
+
+# target to generate assembly for a file
+src/Astar_searcher.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/Astar_searcher.dir/build.make a_star/CMakeFiles/Astar_searcher.dir/src/Astar_searcher.cpp.s
+.PHONY : src/Astar_searcher.cpp.s
 
 src/astar_node.o: src/astar_node.cpp.o
 
@@ -223,6 +295,60 @@ src/astar_node.s: src/astar_node.cpp.s
 src/astar_node.cpp.s:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.s
 .PHONY : src/astar_node.cpp.s
+
+src/keyboard_input_node.o: src/keyboard_input_node.cpp.o
+
+.PHONY : src/keyboard_input_node.o
+
+# target to build an object file
+src/keyboard_input_node.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/keyboard_input_node.dir/build.make a_star/CMakeFiles/keyboard_input_node.dir/src/keyboard_input_node.cpp.o
+.PHONY : src/keyboard_input_node.cpp.o
+
+src/keyboard_input_node.i: src/keyboard_input_node.cpp.i
+
+.PHONY : src/keyboard_input_node.i
+
+# target to preprocess a source file
+src/keyboard_input_node.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/keyboard_input_node.dir/build.make a_star/CMakeFiles/keyboard_input_node.dir/src/keyboard_input_node.cpp.i
+.PHONY : src/keyboard_input_node.cpp.i
+
+src/keyboard_input_node.s: src/keyboard_input_node.cpp.s
+
+.PHONY : src/keyboard_input_node.s
+
+# target to generate assembly for a file
+src/keyboard_input_node.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/keyboard_input_node.dir/build.make a_star/CMakeFiles/keyboard_input_node.dir/src/keyboard_input_node.cpp.s
+.PHONY : src/keyboard_input_node.cpp.s
+
+src/minisnap_node.o: src/minisnap_node.cpp.o
+
+.PHONY : src/minisnap_node.o
+
+# target to build an object file
+src/minisnap_node.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o
+.PHONY : src/minisnap_node.cpp.o
+
+src/minisnap_node.i: src/minisnap_node.cpp.i
+
+.PHONY : src/minisnap_node.i
+
+# target to preprocess a source file
+src/minisnap_node.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.i
+.PHONY : src/minisnap_node.cpp.i
+
+src/minisnap_node.s: src/minisnap_node.cpp.s
+
+.PHONY : src/minisnap_node.s
+
+# target to generate assembly for a file
+src/minisnap_node.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.s
+.PHONY : src/minisnap_node.cpp.s
 
 src/pub_point_node.o: src/pub_point_node.cpp.o
 
@@ -261,14 +387,26 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... keyboard_input_node"
+	@echo "... astar_node"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... pub_point_node"
-	@echo "... astar_node"
+	@echo "... minisnap_node"
+	@echo "... Astar_searcher"
+	@echo "... src/Astar_searcher.o"
+	@echo "... src/Astar_searcher.i"
+	@echo "... src/Astar_searcher.s"
 	@echo "... src/astar_node.o"
 	@echo "... src/astar_node.i"
 	@echo "... src/astar_node.s"
+	@echo "... src/keyboard_input_node.o"
+	@echo "... src/keyboard_input_node.i"
+	@echo "... src/keyboard_input_node.s"
+	@echo "... src/minisnap_node.o"
+	@echo "... src/minisnap_node.i"
+	@echo "... src/minisnap_node.s"
 	@echo "... src/pub_point_node.o"
 	@echo "... src/pub_point_node.i"
 	@echo "... src/pub_point_node.s"

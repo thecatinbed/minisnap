@@ -75,6 +75,8 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "bit": "cpp",
-        "eigen": "cpp"
+        "eigen": "cpp",
+        "forward_list": "cpp",
+        "regex": "cpp"
     }
 }

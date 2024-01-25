@@ -7,6 +7,7 @@ project(a_star)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+##set(PCL_INCLUDE_DIRS /usr/include/pcl-1.10)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
@@ -14,11 +15,15 @@ find_package(catkin REQUIRED COMPONENTS
   minisnap
   quadrotor_msgs
 )
+find_package(PCL REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
-
+set( CMAKE_CXX_STANDARD 14)
+SET(CMAKE_BUILD_TYPE "Debug")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
@@ -118,26 +123,34 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
+  SYSTEM
   ${catkin_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
+  ${Eigen3_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/a_star.cpp
 # )
-
+add_library(Astar_searcher
+  include/a_star/Astar_searcher.h
+  src/Astar_searcher.cpp
+)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(Astar_searcher ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/a_star_node.cpp)
-add_executable(astar_node src/astar_node.cpp)
+add_executable(minisnap_node src/minisnap_node.cpp)
 add_executable(pub_point_node src/pub_point_node.cpp)
+add_executable(astar_node src/astar_node.cpp)
+add_executable(keyboard_input_node src/keyboard_input_node.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -152,8 +165,12 @@ add_executable(pub_point_node src/pub_point_node.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(astar_node planner trajectory_generator ${catkin_LIBRARIES})
+target_link_libraries(Astar_searcher ${catkin_LIBRARIES})
+target_link_libraries(minisnap_node planner trajectory_generator ${catkin_LIBRARIES})
 target_link_libraries(pub_point_node ${catkin_LIBRARIES})
+target_link_libraries(astar_node Astar_searcher ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(keyboard_input_node ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############

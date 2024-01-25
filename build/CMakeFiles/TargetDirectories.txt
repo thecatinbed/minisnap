@@ -141,11 +141,14 @@
 /home/mm/catkin_ws/build/a_star/CMakeFiles/install/local.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/edit_cache.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/test.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/keyboard_input_node.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/astar_node.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/install.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/list_install_components.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/rebuild_cache.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/pub_point_node.dir
-/home/mm/catkin_ws/build/a_star/CMakeFiles/astar_node.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/minisnap_node.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/Astar_searcher.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/install/strip.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/install/local.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/tf_generate_messages_py.dir
