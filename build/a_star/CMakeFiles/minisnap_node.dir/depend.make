@@ -68,7 +68,9 @@ a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/inc
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/ros/wall_timer.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
+a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/std_msgs/ColorRGBA.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
+a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/visualization_msgs/Marker.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /usr/include/eigen3/Eigen/Cholesky

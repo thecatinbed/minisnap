@@ -326,7 +326,44 @@ void planner::draw_desire_trajectory(ros::Publisher despath_pub){
     
     ROS_INFO("Desire trajectory was drawn.");
 }
-
+void planner::draw_desire_trajectory_marker(ros::Publisher despath_pub){
+    Vector3d pos_;
+    geometry_msgs::Point point;
+    ROS_INFO("Drawing desire trajectory.");
+     // 创建visualization_msgs::Marker消息
+    visualization_msgs::Marker marker;
+    // 设置消息类型为LINE_STRIP
+    marker.type = visualization_msgs::Marker::LINE_STRIP;
+    // 设置坐标系
+    marker.header.frame_id = "world";
+    marker.header.stamp = ros::Time::now();
+    marker.ns = "";
+    marker.id = 0;
+    marker.action = visualization_msgs::Marker::ADD;
+    marker.pose.orientation.w = 1.0;
+    // 设置线条的宽度
+    marker.scale.x = 0.02;
+    marker.scale.y = 0.02;
+    marker.scale.z = 0.02;
+    // 设置线条的颜色
+    marker.color.r = 1.0;
+    marker.color.g = 0.0;
+    marker.color.b = 0.0;
+    marker.color.a = 1.0;
+    for (int i = 0; i < time_everytraj.size(); i++) 
+    {
+        for (double t = 0.0; t < time_everytraj(i); t += 0.01) 
+        {
+            pos_ = getPosPoly(poly_coeff, i, t);
+            point.x = pos_(0);
+            point.y = pos_(1);
+            point.z = pos_(2);
+            marker.points.push_back(point);
+        }  
+    }
+    despath_pub.publish(marker);
+    ROS_INFO("Desire trajectory was drawn.");
+}
 /*
 *轨迹发布
 */

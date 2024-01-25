@@ -76,7 +76,7 @@ Visualization Manager:
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.20000000298023224
-      Style: Boxes
+      Style: Spheres
       Topic: /point_map
       Unreliable: false
       Use Fixed Frame: true
@@ -95,7 +95,7 @@ Visualization Manager:
       Buffer Length: 1
       Class: rviz/Path
       Color: 0; 0; 0
-      Enabled: true
+      Enabled: false
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
@@ -114,13 +114,21 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /desire_trajectory
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /astar_path_marker
       Name: Marker
       Namespaces:
-        demo_node/astar_path: true
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /desire_trajectory
+      Name: Marker
+      Namespaces:
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -151,7 +159,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 9.983992576599121
+      Distance: 13.168207168579102
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -159,17 +167,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.28284281492233276
-        Y: 0.4469360411167145
-        Z: -1.679427146911621
+        X: 0.46175673604011536
+        Y: 0.13685011863708496
+        Z: -0.2515096664428711
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.1047970056533813
+      Pitch: 0.7947971820831299
       Target Frame: <Fixed Frame>
-      Yaw: 0.761782169342041
+      Yaw: 5.929957389831543
     Saved: ~
 Window Geometry:
   Displays:

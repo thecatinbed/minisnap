@@ -9,6 +9,7 @@
 #include <nav_msgs/Path.h>
 #include <quadrotor_msgs/PositionCommand.h>
 #include "minisnap/trajectory_generator.h"
+#include <visualization_msgs/Marker.h>
 using namespace std;
 using namespace Eigen;
 #define SNAP 4
@@ -44,6 +45,7 @@ class planner
         std::vector<quadrotor_msgs::PositionCommand> get_trajectory(void);
         void tra_publish(void);
         void draw_desire_trajectory(ros::Publisher despath_pub);
+        void draw_desire_trajectory_marker(ros::Publisher despath_pub);
 };
 
 // #endif

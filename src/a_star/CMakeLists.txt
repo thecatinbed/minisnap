@@ -168,7 +168,7 @@ add_executable(keyboard_input_node src/keyboard_input_node.cpp)
 target_link_libraries(Astar_searcher ${catkin_LIBRARIES})
 target_link_libraries(minisnap_node planner trajectory_generator ${catkin_LIBRARIES})
 target_link_libraries(pub_point_node ${catkin_LIBRARIES})
-target_link_libraries(astar_node Astar_searcher ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(astar_node Astar_searcher planner trajectory_generator ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(keyboard_input_node ${catkin_LIBRARIES})
 
 #############

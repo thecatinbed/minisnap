@@ -80,6 +80,8 @@ astar_node_EXTERNAL_OBJECTS =
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: a_star/CMakeFiles/astar_node.dir/build.make
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: /home/mm/catkin_ws/devel/lib/libAstar_searcher.so
+/home/mm/catkin_ws/devel/lib/a_star/astar_node: /home/mm/catkin_ws/devel/lib/libplanner.so
+/home/mm/catkin_ws/devel/lib/a_star/astar_node: /home/mm/catkin_ws/devel/lib/libtrajectory_generator.so
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: /opt/ros/noetic/lib/libroscpp.so
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/mm/catkin_ws/devel/lib/a_star/astar_node: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0

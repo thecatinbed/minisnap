@@ -3042,6 +3042,8 @@ a_star/CMakeFiles/keyboard_input_node.dir/clean:
 # All Build rule for target.
 a_star/CMakeFiles/astar_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/decode_msgs.dir/all
 a_star/CMakeFiles/astar_node.dir/all: Utils/quadrotor_msgs/CMakeFiles/encode_msgs.dir/all
+a_star/CMakeFiles/astar_node.dir/all: minisnap/CMakeFiles/trajectory_generator.dir/all
+a_star/CMakeFiles/astar_node.dir/all: minisnap/CMakeFiles/planner.dir/all
 a_star/CMakeFiles/astar_node.dir/all: a_star/CMakeFiles/Astar_searcher.dir/all
 	$(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/depend
 	$(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/build
@@ -3050,7 +3052,7 @@ a_star/CMakeFiles/astar_node.dir/all: a_star/CMakeFiles/Astar_searcher.dir/all
 
 # Build rule for subdir invocation for target.
 a_star/CMakeFiles/astar_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 61
 	$(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/astar_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mm/catkin_ws/build/CMakeFiles 0
 .PHONY : a_star/CMakeFiles/astar_node.dir/rule
