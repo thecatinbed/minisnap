@@ -25,6 +25,7 @@ using namespace Eigen;
 bool goal_set = false;
 bool start_plan = false;
 string pcdPath;
+geometry_msgs::PoseStamped px4_pose;
 sensor_msgs::PointCloud2 globalMap_pcd;
 pcl::PointCloud<pcl::PointXYZ> cloudMap;
 pcl::PointCloud<pcl::PointXYZ> cloudMap_vis;    
@@ -163,21 +164,52 @@ void visGridPath( vector<Vector3d> nodes, ros::Publisher _grid_path_vis_pub)
     _grid_path_vis_pub.publish(node_vis);
 }
 
+void pose_cb(const geometry_msgs::PoseStamped::ConstPtr &pose){
+    px4_pose = *pose;
+    //ROS_INFO("px4 pose get");
+}
+
+void init_marker(visualization_msgs::Marker* marker){
+    // 设置消息类型为LINE_STRIP
+    marker->type = visualization_msgs::Marker::LINE_STRIP;
+    // 设置坐标系
+    marker->header.frame_id = "world";
+    marker->header.stamp = ros::Time::now();
+    marker->ns = "";
+    marker->id = 0;
+    marker->action = visualization_msgs::Marker::ADD;
+    marker->pose.orientation.w = 1.0;
+    // 设置线条的宽度
+    marker->scale.x = 0.02;
+    marker->scale.y = 0.02;
+    marker->scale.z = 0.02;
+    // 设置线条的颜色
+    marker->color.r = 0.0;
+    marker->color.g = 1.0;
+    marker->color.b = 1.0;
+    marker->color.a = 1.0;
+
+    // 清空列表的点
+    marker->points.clear();
+}
 int main(int argc, char** argv){
 
     ros::init(argc,argv,"astar_node");
     ros::NodeHandle nh;
     planner myplanner;
 
+    visualization_msgs::Marker real_trajectory_marker;
     vector<quadrotor_msgs::PositionCommand> tra;
 
     ros::Publisher map_pub = nh.advertise<sensor_msgs::PointCloud2>("/point_map",1);//可视化点云地图
     ros::Publisher _grid_path_vis_pub = nh.advertise<visualization_msgs::Marker>("/astar_path_marker", 1);//可视化路径点
     ros::Publisher tra_generation_pub = nh.advertise<quadrotor_msgs::PositionCommand>("/planning/pos_cmd", 10);  //发布px4Ctrl控制指令
     //ros::Publisher despath_pub = nh.advertise<nav_msgs::Path>("/desire_trajectory", 10, true);
-    ros::Publisher despath_pub = nh.advertise<visualization_msgs::Marker>("/desire_trajectory",1,true);//可视化minisnap规划的轨迹
+    ros::Publisher desTrajectory_pub = nh.advertise<visualization_msgs::Marker>("/desire_trajectory",1,true);//可视化minisnap规划的轨迹
+    ros::Publisher realTrajectory_pub = nh.advertise<visualization_msgs::Marker>("/real_trajectory",1,true);//可视化minisnap规划的轨迹
 
     ros::Subscriber goalPoint_sub = nh.subscribe("/goal_point",1, goalPointCallback);
+    ros::Subscriber pose_sub = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, pose_cb);
 
     nh.param("pcd_path", pcdPath, string("/home/mm/catkin_ws/src/a_star/pcd/map.pcd"));
     nh.param("heuristic/distance",distanceType,string("euclidean"));
@@ -201,12 +233,12 @@ int main(int argc, char** argv){
     while(map_pub.getNumSubscribers()<1);
     ros::Duration(3).sleep();       //延时，防止rviz接收不到地图
     map_pub.publish(globalMap_pcd);
-    
+    init_marker(&real_trajectory_marker);
     while(ros::ok()){
         if(!start_plan && goal_set){
             goal_set = false;
             if(pathfinderPtr->isReachable(_goal_pt)){
-                pathfinderPtr -> AstarGraphSearch(Vector3d(0,0,0), _goal_pt);
+                pathfinderPtr -> AstarGraphSearch(Vector3d(px4_pose.pose.position.x,px4_pose.pose.position.y,px4_pose.pose.position.z), _goal_pt);
                 //通过A星算法得到路径点集和close集合
                 auto grid_path     = pathfinderPtr->getPath();
                 auto visited_nodes = pathfinderPtr->getVisitedNodes();
@@ -220,21 +252,21 @@ int main(int argc, char** argv){
                 myplanner.dot_num = ((int)grid_path.size()) + 1 ;
                 myplanner.time_everytraj.resize(myplanner.dot_num - 1);
                 myplanner.route.resize(myplanner.dot_num, 3);
-                myplanner.route(0,0) = 0;
-                myplanner.route(0,1) = 0;
-                myplanner.route(0,2) = 0;
+                myplanner.route(0,0) = px4_pose.pose.position.x;
+                myplanner.route(0,1) = px4_pose.pose.position.y;
+                myplanner.route(0,2) = px4_pose.pose.position.z;
                 Vector3d node;
                 geometry_msgs::Point point;
                 for(int i = 0; i < ((int)grid_path.size()); i++){
                     node = grid_path[i];
-                    myplanner.time_everytraj[i] = 1.0;
+                    myplanner.time_everytraj[i] = 1;//每一格的时间
                     myplanner.route(i+1, 0) = node(0);
                     myplanner.route(i+1, 1) = node(1);
                     myplanner.route(i+1, 2) = node(2);
                 }
                 myplanner.poly_coeff = myplanner.getcoeff();
                 tra = myplanner.get_trajectory(); //离散化轨迹
-                myplanner.draw_desire_trajectory_marker(despath_pub);
+                myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
                 start_plan = true;
             }else{
                 ROS_INFO("the end point is not reachable");
@@ -243,8 +275,14 @@ int main(int argc, char** argv){
         if(start_plan){
             goal_set = false;
             static int i = 0;
-            if( i < tra.size()){
+            if( i < (int)tra.size()){
                 tra_generation_pub.publish(tra[i]);
+                geometry_msgs::Point temp_point;
+                temp_point.x = px4_pose.pose.position.x;
+                temp_point.y = px4_pose.pose.position.y;
+                temp_point.z = px4_pose.pose.position.z;
+                real_trajectory_marker.points.push_back(temp_point);
+                realTrajectory_pub.publish(real_trajectory_marker);
                 i++;
             }else{
                 i = 0;

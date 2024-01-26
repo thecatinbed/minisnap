@@ -228,7 +228,7 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
     std::vector<quadrotor_msgs::PositionCommand> trajectory_vector;
     quadrotor_msgs::PositionCommand trajectory;
     ros::Publisher tra_generation_pub = n.advertise<quadrotor_msgs::PositionCommand>("/planning/pos_cmd", 10);
-    ros::Publisher realpath_pub = n.advertise<nav_msgs::Path>("/real_trajectory", 10);
+    //ros::Publisher realpath_pub = n.advertise<nav_msgs::Path>("/real_trajectory", 10);
 
     Vector3d pos_;             //用于获取getPosPoly返回的向量，转化为pose信息
     Vector3d vel_;
@@ -331,7 +331,7 @@ void planner::draw_desire_trajectory_marker(ros::Publisher despath_pub){
     geometry_msgs::Point point;
     ROS_INFO("Drawing desire trajectory.");
      // 创建visualization_msgs::Marker消息
-    visualization_msgs::Marker marker;
+    static visualization_msgs::Marker marker;
     // 设置消息类型为LINE_STRIP
     marker.type = visualization_msgs::Marker::LINE_STRIP;
     // 设置坐标系

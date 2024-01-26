@@ -182,14 +182,6 @@ PX4Ctrlfsm.h
 uav_utils/converters.h
 -
 
-/home/mm/catkin_ws/src/px4ctrl/src/PX4Ctrlnode.cpp
-ros/ros.h
--
-PX4Ctrlfsm.h
-/home/mm/catkin_ws/src/px4ctrl/src/PX4Ctrlfsm.h
-signal.h
--
-
 /opt/ros/noetic/include/dynamic_reconfigure/BoolParameter.h
 string
 -

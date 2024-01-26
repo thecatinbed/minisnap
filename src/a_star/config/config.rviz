@@ -5,10 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
         - /PointCloud21
         - /Path1
         - /Marker1
+        - /Marker2
+        - /Marker3
       Splitter Ratio: 0.5
     Tree Height: 565
   - Class: rviz/Selection
@@ -131,9 +132,17 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /real_trajectory
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
-    Background Color: 252; 233; 79
+    Background Color: 211; 215; 207
     Default Light: true
     Fixed Frame: world
     Frame Rate: 30
@@ -159,7 +168,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 13.168207168579102
+      Distance: 12.7656831741333
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -167,17 +176,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.46175673604011536
-        Y: 0.13685011863708496
-        Z: -0.2515096664428711
+        X: -0.07240460813045502
+        Y: 0.3259855806827545
+        Z: -0.9499114155769348
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7947971820831299
+      Pitch: 0.7597977519035339
       Target Frame: <Fixed Frame>
-      Yaw: 5.929957389831543
+      Yaw: 6.131786346435547
     Saved: ~
 Window Geometry:
   Displays:

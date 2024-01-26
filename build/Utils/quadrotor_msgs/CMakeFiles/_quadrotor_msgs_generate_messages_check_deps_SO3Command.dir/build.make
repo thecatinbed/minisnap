@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/mm/catkin_ws/build
 include Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_SO3Command.dir/progress.make
 
 Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_SO3Command:
-	cd /home/mm/catkin_ws/build/Utils/quadrotor_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py quadrotor_msgs /home/mm/catkin_ws/src/Utils/quadrotor_msgs/msg/SO3Command.msg quadrotor_msgs/AuxCommand:geometry_msgs/Vector3:std_msgs/Header:geometry_msgs/Quaternion
+	cd /home/mm/catkin_ws/build/Utils/quadrotor_msgs && ../../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py quadrotor_msgs /home/mm/catkin_ws/src/Utils/quadrotor_msgs/msg/SO3Command.msg geometry_msgs/Quaternion:geometry_msgs/Vector3:quadrotor_msgs/AuxCommand:std_msgs/Header
 
 _quadrotor_msgs_generate_messages_check_deps_SO3Command: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_SO3Command
 _quadrotor_msgs_generate_messages_check_deps_SO3Command: Utils/quadrotor_msgs/CMakeFiles/_quadrotor_msgs_generate_messages_check_deps_SO3Command.dir/build.make

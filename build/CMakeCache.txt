@@ -730,8 +730,17 @@ cmake_utils_SOURCE_DIR:STATIC=/home/mm/catkin_ws/src/Utils/cmake_utils
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/noetic/share/cpp_common/cmake
 
+//The directory containing a CMake configuration file for diagnostic_msgs.
+diagnostic_msgs_DIR:PATH=/opt/ros/noetic/share/diagnostic_msgs/cmake
+
+//The directory containing a CMake configuration file for diagnostic_updater.
+diagnostic_updater_DIR:PATH=/opt/ros/noetic/share/diagnostic_updater/cmake
+
 //The directory containing a CMake configuration file for dynamic_reconfigure.
 dynamic_reconfigure_DIR:PATH=/opt/ros/noetic/share/dynamic_reconfigure/cmake
+
+//The directory containing a CMake configuration file for eigen_conversions.
+eigen_conversions_DIR:PATH=/opt/ros/noetic/share/eigen_conversions/cmake
 
 //The directory containing a CMake configuration file for flann.
 flann_DIR:PATH=flann_DIR-NOTFOUND
@@ -818,8 +827,14 @@ laser_geometry_DIR:PATH=/opt/ros/noetic/share/laser_geometry/cmake
 //Path to a library.
 lib:FILEPATH=/opt/ros/noetic/lib/libtf2.so
 
+//The directory containing a CMake configuration file for libmavconn.
+libmavconn_DIR:PATH=/opt/ros/noetic/share/libmavconn/cmake
+
 //The directory containing a CMake configuration file for map_msgs.
 map_msgs_DIR:PATH=/opt/ros/noetic/share/map_msgs/cmake
+
+//The directory containing a CMake configuration file for mavros.
+mavros_DIR:PATH=/opt/ros/noetic/share/mavros/cmake
 
 //The directory containing a CMake configuration file for mavros_msgs.
 mavros_msgs_DIR:PATH=/opt/ros/noetic/share/mavros_msgs/cmake
@@ -985,6 +1000,9 @@ tf2_ros_DIR:PATH=/opt/ros/noetic/share/tf2_ros/cmake
 
 //The directory containing a CMake configuration file for tf.
 tf_DIR:PATH=/opt/ros/noetic/share/tf/cmake
+
+//The directory containing a CMake configuration file for trajectory_msgs.
+trajectory_msgs_DIR:PATH=/opt/ros/noetic/share/trajectory_msgs/cmake
 
 //Value Computed by CMake
 uav_utils_BINARY_DIR:STATIC=/home/mm/catkin_ws/build/Utils/uav_utils
