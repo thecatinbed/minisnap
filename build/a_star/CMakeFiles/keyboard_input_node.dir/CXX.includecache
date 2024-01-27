@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/mm/catkin_ws/devel/include/quadrotor_msgs/TakeoffLand.h
-string
--
-vector
--
-memory
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-
 /home/mm/catkin_ws/src/a_star/src/keyboard_input_node.cpp
 ros/ros.h
 -
@@ -31,7 +15,7 @@ regex
 -
 geometry_msgs/Point.h
 -
-quadrotor_msgs/TakeoffLand.h
+std_msgs/Bool.h
 -
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
@@ -699,6 +683,22 @@ ros/forwards.h
 /opt/ros/noetic/include/ros/ros/forwards.h
 
 /opt/ros/noetic/include/rosconsole/macros_generated.h
+
+/opt/ros/noetic/include/std_msgs/Bool.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
 
 /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 ros/macros.h

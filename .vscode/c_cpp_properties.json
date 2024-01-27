@@ -15,7 +15,8 @@
                 "/home/mm/catkin_ws/src/Utils/quadrotor_msgs/include/**",
                 "/home/mm/catkin_ws/src/Utils/uav_utils/include/**",
                 "/usr/include/**",
-                "${workspaceFolder}/src/a_star/include"
+                "${workspaceFolder}/src/a_star/include",
+                "${workspaceFolder}/src/rviz-3d-nav-goal-tool/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

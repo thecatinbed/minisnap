@@ -2,7 +2,7 @@
 #include <iostream>
 #include <regex>
 #include <geometry_msgs/Point.h>
-#include <quadrotor_msgs/TakeoffLand.h>
+#include <std_msgs/Bool.h>
 
 int main(int argc, char** argv)
 {
@@ -12,7 +12,8 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "input_recognition_node");
   ros::NodeHandle nh;
   ros::Publisher goalPoint_pub = nh.advertise<geometry_msgs::Point>("/goal_point",1);
-  ros::Publisher takeoff_pub = nh.advertise<quadrotor_msgs::TakeoffLand>("/takeoff_land",1);
+  ros::Publisher takeoff_pub = nh.advertise<std_msgs::Bool>("/keyboard/takeoff_cmd",1);
+
   // 定义正则表达式模式
   std::regex takeoff_pattern("takeoff");
   std::regex takeland_pattern("takeland");
@@ -31,22 +32,31 @@ int main(int argc, char** argv)
     {
       takeoffComplete = true;
       ROS_INFO("识别到 takeoff 命令");
-      geometry_msgs::Point startPoint;
-      startPoint.x = 0;
-      startPoint.y = 0;
-      startPoint.z = 2;
-      goalPoint_pub.publish(startPoint);
+      // geometry_msgs::Point startPoint;
+      // startPoint.x = 0;
+      // startPoint.y = 0;
+      // startPoint.z = 2;
+      std_msgs::Bool takeoffcmd;
+      takeoffcmd.data = true;
+      takeoff_pub.publish(takeoffcmd);
       
     }
     else if (std::regex_match(input, match, takeland_pattern))
     {
-      takeoffComplete = false;
       ROS_INFO("识别到 takeland 命令");
-      geometry_msgs::Point startPoint;
-      startPoint.x = 0;
-      startPoint.y = 0;
-      startPoint.z = 0;
-      goalPoint_pub.publish(startPoint);
+      if(!takeoffComplete){
+        ROS_WARN("请先输入takeoff指令");
+      }else{
+        std_msgs::Bool takeoffcmd;
+        takeoffcmd.data = false;
+        takeoff_pub.publish(takeoffcmd);
+        takeoffComplete = false;
+      }
+      // geometry_msgs::Point startPoint;
+      // startPoint.x = 0;
+      // startPoint.y = 0;
+      // startPoint.z = 0;
+      // goalPoint_pub.publish(startPoint);
     }
     else if (std::regex_match(input, match, coordinate_pattern))
     {

@@ -6,13 +6,14 @@
 #include <pcl/point_types.h>
 #include <ros/ros.h>
 #include <ros/console.h>
-#include <sensor_msgs/PointCloud2.h>
 
+#include <sensor_msgs/PointCloud2.h>
 #include <nav_msgs/Odometry.h>
 #include <nav_msgs/Path.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include <std_msgs/Bool.h>
 
 #include "a_star/Astar_searcher.h"
 #include "a_star/backward.hpp"
@@ -24,6 +25,7 @@ using namespace Eigen;
 
 bool goal_set = false;
 bool start_plan = false;
+bool takeoffCmd = false;
 string pcdPath;
 geometry_msgs::PoseStamped px4_pose;
 sensor_msgs::PointCloud2 globalMap_pcd;
@@ -104,21 +106,28 @@ void visualize_map(AstarPathFinder *pathfinderPtr){
     globalMap_pcd.header.frame_id = "world";
 }
 
-void goalPointCallback(const geometry_msgs::Point::ConstPtr &point){
-    if(point->x >= _map_lower(0) && point->x <= _map_upper(0) &&
-       point->y >= _map_lower(1) && point->y <= _map_upper(1) &&
-       point->z >= _map_lower(2) && point->z <= _map_upper(2))
-    {
-        _goal_pt << point->x,
-                     point->y,
-                     point->z;
-        goal_set = true;
-    }
-    else
-    {
-        ROS_INFO("goal_point data is illegal");
-    }
-    
+void init_marker(visualization_msgs::Marker* marker){
+    // 设置消息类型为LINE_STRIP
+    marker->type = visualization_msgs::Marker::LINE_STRIP;
+    // 设置坐标系
+    marker->header.frame_id = "world";
+    marker->header.stamp = ros::Time::now();
+    marker->ns = "";
+    marker->id = 0;
+    marker->action = visualization_msgs::Marker::ADD;
+    marker->pose.orientation.w = 1.0;
+    // 设置线条的宽度
+    marker->scale.x = 0.02;
+    marker->scale.y = 0.02;
+    marker->scale.z = 0.02;
+    // 设置线条的颜色
+    marker->color.r = 0.0;
+    marker->color.g = 1.0;
+    marker->color.b = 1.0;
+    marker->color.a = 1.0;
+
+    // 清空列表的点
+    marker->points.clear();
 }
 
 void visGridPath( vector<Vector3d> nodes, ros::Publisher _grid_path_vis_pub)
@@ -164,35 +173,36 @@ void visGridPath( vector<Vector3d> nodes, ros::Publisher _grid_path_vis_pub)
     _grid_path_vis_pub.publish(node_vis);
 }
 
-void pose_cb(const geometry_msgs::PoseStamped::ConstPtr &pose){
+void goalPointCallback(const geometry_msgs::Point::ConstPtr &point){
+    if(point->x >= _map_lower(0) && point->x <= _map_upper(0) &&
+       point->y >= _map_lower(1) && point->y <= _map_upper(1) &&
+       point->z >= _map_lower(2) && point->z <= _map_upper(2))
+    {
+        _goal_pt << point->x,
+                     point->y,
+                     point->z;
+        goal_set = true;
+    }
+    else
+    {
+        ROS_INFO("goal_point data is illegal");
+    }
+    
+}
+
+void poseCallback(const geometry_msgs::PoseStamped::ConstPtr &pose){
     px4_pose = *pose;
     //ROS_INFO("px4 pose get");
 }
 
-void init_marker(visualization_msgs::Marker* marker){
-    // 设置消息类型为LINE_STRIP
-    marker->type = visualization_msgs::Marker::LINE_STRIP;
-    // 设置坐标系
-    marker->header.frame_id = "world";
-    marker->header.stamp = ros::Time::now();
-    marker->ns = "";
-    marker->id = 0;
-    marker->action = visualization_msgs::Marker::ADD;
-    marker->pose.orientation.w = 1.0;
-    // 设置线条的宽度
-    marker->scale.x = 0.02;
-    marker->scale.y = 0.02;
-    marker->scale.z = 0.02;
-    // 设置线条的颜色
-    marker->color.r = 0.0;
-    marker->color.g = 1.0;
-    marker->color.b = 1.0;
-    marker->color.a = 1.0;
-
-    // 清空列表的点
-    marker->points.clear();
+void takeoffCallback(const std_msgs::Bool::ConstPtr &cmd){
+    takeoffCmd = cmd ->data;
 }
+
 int main(int argc, char** argv){
+
+    int cmd_state = 0;
+    int landing_state = 0;
 
     ros::init(argc,argv,"astar_node");
     ros::NodeHandle nh;
@@ -209,7 +219,8 @@ int main(int argc, char** argv){
     ros::Publisher realTrajectory_pub = nh.advertise<visualization_msgs::Marker>("/real_trajectory",1,true);//可视化minisnap规划的轨迹
 
     ros::Subscriber goalPoint_sub = nh.subscribe("/goal_point",1, goalPointCallback);
-    ros::Subscriber pose_sub = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, pose_cb);
+    ros::Subscriber pose_sub = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, poseCallback);
+    ros::Subscriber takeoffCmd_sub = nh.subscribe<std_msgs::Bool>("/keyboard/takeoff_cmd", 1, takeoffCallback);
 
     nh.param("pcd_path", pcdPath, string("/home/mm/catkin_ws/src/a_star/pcd/map.pcd"));
     nh.param("heuristic/distance",distanceType,string("euclidean"));
@@ -235,60 +246,232 @@ int main(int argc, char** argv){
     map_pub.publish(globalMap_pcd);
     init_marker(&real_trajectory_marker);
     while(ros::ok()){
-        if(!start_plan && goal_set){
-            goal_set = false;
-            if(pathfinderPtr->isReachable(_goal_pt)){
-                pathfinderPtr -> AstarGraphSearch(Vector3d(px4_pose.pose.position.x,px4_pose.pose.position.y,px4_pose.pose.position.z), _goal_pt);
-                //通过A星算法得到路径点集和close集合
-                auto grid_path     = pathfinderPtr->getPath();
-                auto visited_nodes = pathfinderPtr->getVisitedNodes();
-
-                //可视化路径点
-                visGridPath(grid_path, _grid_path_vis_pub);
-                 //重置Astar算法，方便下次调用
-                pathfinderPtr->resetUsedGrids();
-
-                //A*算法结束，开始用minisnap算法规划轨迹
-                myplanner.dot_num = ((int)grid_path.size()) + 1 ;
-                myplanner.time_everytraj.resize(myplanner.dot_num - 1);
-                myplanner.route.resize(myplanner.dot_num, 3);
+        switch (cmd_state)
+        {
+        case 0:
+            if(!start_plan && takeoffCmd){
+                // cmd_state = 1;
+                myplanner.dot_num = 2;
+                myplanner.time_everytraj.resize(1);
+                myplanner.time_everytraj(0) = 10;
+                myplanner.route.resize(2, 3);
                 myplanner.route(0,0) = px4_pose.pose.position.x;
                 myplanner.route(0,1) = px4_pose.pose.position.y;
                 myplanner.route(0,2) = px4_pose.pose.position.z;
-                Vector3d node;
-                geometry_msgs::Point point;
-                for(int i = 0; i < ((int)grid_path.size()); i++){
-                    node = grid_path[i];
-                    myplanner.time_everytraj[i] = 1;//每一格的时间
-                    myplanner.route(i+1, 0) = node(0);
-                    myplanner.route(i+1, 1) = node(1);
-                    myplanner.route(i+1, 2) = node(2);
-                }
+
+                myplanner.route(1,0) = px4_pose.pose.position.x;
+                myplanner.route(1,1) = px4_pose.pose.position.y;
+                myplanner.route(1,2) = 2;
                 myplanner.poly_coeff = myplanner.getcoeff();
+                cout << myplanner.poly_coeff << endl;
                 tra = myplanner.get_trajectory(); //离散化轨迹
                 myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
                 start_plan = true;
-            }else{
-                ROS_INFO("the end point is not reachable");
             }
-        }
-        if(start_plan){
-            goal_set = false;
-            static int i = 0;
-            if( i < (int)tra.size()){
-                tra_generation_pub.publish(tra[i]);
-                geometry_msgs::Point temp_point;
-                temp_point.x = px4_pose.pose.position.x;
-                temp_point.y = px4_pose.pose.position.y;
-                temp_point.z = px4_pose.pose.position.z;
-                real_trajectory_marker.points.push_back(temp_point);
-                realTrajectory_pub.publish(real_trajectory_marker);
-                i++;
-            }else{
-                i = 0;
-                start_plan = false;
-                std::cout<< "publish complete" <<endl;
+            if(start_plan){
+                static int i = 0;
+                if( i < (int)tra.size()){
+                    tra_generation_pub.publish(tra[i]);
+                    geometry_msgs::Point temp_point;
+                    temp_point.x = px4_pose.pose.position.x;
+                    temp_point.y = px4_pose.pose.position.y;
+                    temp_point.z = px4_pose.pose.position.z;
+                    real_trajectory_marker.points.push_back(temp_point);
+                    realTrajectory_pub.publish(real_trajectory_marker);
+                    i++;
+                }else{
+                    i = 0;
+                    start_plan = false;
+                    std::cout<< "takeoff complete" <<endl;
+                    cmd_state = 1;
+                }
             }
+            break;
+        
+        case 1:
+            if(!start_plan && !takeoffCmd){
+                cmd_state = 2;
+                break;
+            }
+            if(!start_plan && goal_set){
+                goal_set = false;
+                if(pathfinderPtr->isReachable(_goal_pt)){
+                    pathfinderPtr -> AstarGraphSearch(Vector3d(px4_pose.pose.position.x,px4_pose.pose.position.y,px4_pose.pose.position.z), _goal_pt);
+                    //通过A星算法得到路径点集和close集合
+                    auto grid_path     = pathfinderPtr->getPath();
+                    auto visited_nodes = pathfinderPtr->getVisitedNodes();
+
+                    //可视化路径点
+                    visGridPath(grid_path, _grid_path_vis_pub);
+                    //重置Astar算法，方便下次调用
+                    pathfinderPtr->resetUsedGrids();
+
+                    //A*算法结束，开始用minisnap算法规划轨迹
+                    myplanner.dot_num = ((int)grid_path.size()) + 1 ;
+                    myplanner.time_everytraj.resize(myplanner.dot_num - 1);
+                    myplanner.route.resize(myplanner.dot_num, 3);
+                    myplanner.route(0,0) = px4_pose.pose.position.x;
+                    myplanner.route(0,1) = px4_pose.pose.position.y;
+                    myplanner.route(0,2) = px4_pose.pose.position.z;
+                    Vector3d node;
+                    geometry_msgs::Point point;
+                    for(int i = 0; i < ((int)grid_path.size()); i++){
+                        node = grid_path[i];
+                        myplanner.time_everytraj(i) = 1;//每一格的时间
+                        myplanner.route(i+1, 0) = node(0);
+                        myplanner.route(i+1, 1) = node(1);
+                        myplanner.route(i+1, 2) = node(2);
+                    }
+                    myplanner.poly_coeff = myplanner.getcoeff();
+                    tra = myplanner.get_trajectory(); //离散化轨迹
+                    myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
+                    start_plan = true;
+                }else{
+                    ROS_INFO("the end point is not reachable");
+                }
+            }
+            if(start_plan){
+                goal_set = false;
+                static int i = 0;
+                if( i < (int)tra.size()){
+                    tra_generation_pub.publish(tra[i]);
+                    geometry_msgs::Point temp_point;
+                    temp_point.x = px4_pose.pose.position.x;
+                    temp_point.y = px4_pose.pose.position.y;
+                    temp_point.z = px4_pose.pose.position.z;
+                    real_trajectory_marker.points.push_back(temp_point);
+                    realTrajectory_pub.publish(real_trajectory_marker);
+                    i++;
+                }else{
+                    i = 0;
+                    start_plan = false;
+                    std::cout<< "publish complete" <<endl;
+                }
+            }
+            break;
+        
+        case 2:
+            switch (landing_state)
+            {
+            case 0:
+                if(!start_plan){
+                    myplanner.dot_num = 2;
+                    myplanner.time_everytraj.resize(1);
+                    myplanner.time_everytraj(0) = 25;
+                    myplanner.route.resize(2, 3);
+                    myplanner.route(0,0) = px4_pose.pose.position.x;
+                    myplanner.route(0,1) = px4_pose.pose.position.y;
+                    myplanner.route(0,2) = px4_pose.pose.position.z;
+
+                    myplanner.route(1,0) = px4_pose.pose.position.x;
+                    myplanner.route(1,1) = px4_pose.pose.position.y;
+                    myplanner.route(1,2) = 5;
+                    myplanner.poly_coeff = myplanner.getcoeff();
+                    cout << myplanner.poly_coeff << endl;
+                    tra = myplanner.get_trajectory(); //离散化轨迹
+                    myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
+                    start_plan = true;
+                }else{
+                    static int i = 0;
+                    if( i < (int)tra.size()){
+                        tra_generation_pub.publish(tra[i]);
+                        geometry_msgs::Point temp_point;
+                        temp_point.x = px4_pose.pose.position.x;
+                        temp_point.y = px4_pose.pose.position.y;
+                        temp_point.z = px4_pose.pose.position.z;
+                        real_trajectory_marker.points.push_back(temp_point);
+                        realTrajectory_pub.publish(real_trajectory_marker);
+                        i++;
+                    }else{
+                        i = 0;
+                        start_plan = false;
+                        std::cout<< "landing takeoff complete" <<endl;
+                        landing_state = 1;
+                    }
+                }
+                break;
+            
+            case 1:
+                if(!start_plan){
+                    myplanner.dot_num = 2;
+                    myplanner.time_everytraj.resize(1);
+                    myplanner.time_everytraj(0) = 25;
+                    myplanner.route.resize(2, 3);
+                    myplanner.route(0,0) = px4_pose.pose.position.x;
+                    myplanner.route(0,1) = px4_pose.pose.position.y;
+                    myplanner.route(0,2) = px4_pose.pose.position.z;
+
+                    myplanner.route(1,0) = 0;
+                    myplanner.route(1,1) = 0;
+                    myplanner.route(1,2) = px4_pose.pose.position.z;
+                    myplanner.poly_coeff = myplanner.getcoeff();
+                    cout << myplanner.poly_coeff << endl;
+                    tra = myplanner.get_trajectory(); //离散化轨迹
+                    myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
+                    start_plan = true;
+                }else{
+                    static int i = 0;
+                    if( i < (int)tra.size()){
+                        tra_generation_pub.publish(tra[i]);
+                        geometry_msgs::Point temp_point;
+                        temp_point.x = px4_pose.pose.position.x;
+                        temp_point.y = px4_pose.pose.position.y;
+                        temp_point.z = px4_pose.pose.position.z;
+                        real_trajectory_marker.points.push_back(temp_point);
+                        realTrajectory_pub.publish(real_trajectory_marker);
+                        i++;
+                    }else{
+                        i = 0;
+                        start_plan = false;
+                        std::cout<< "landing up complete" <<endl;
+                        landing_state = 2;
+                    }
+                }
+                break;
+            case 2:
+                if(!start_plan){
+                    myplanner.dot_num = 2;
+                    myplanner.time_everytraj.resize(1);
+                    myplanner.time_everytraj(0) = 25;
+                    myplanner.route.resize(2, 3);
+                    myplanner.route(0,0) = px4_pose.pose.position.x;
+                    myplanner.route(0,1) = px4_pose.pose.position.y;
+                    myplanner.route(0,2) = px4_pose.pose.position.z;
+
+                    myplanner.route(1,0) = 0;
+                    myplanner.route(1,1) = 0;
+                    myplanner.route(1,2) = 0;
+                    myplanner.poly_coeff = myplanner.getcoeff();
+                    cout << myplanner.poly_coeff << endl;
+                    tra = myplanner.get_trajectory(); //离散化轨迹
+                    myplanner.draw_desire_trajectory_marker(desTrajectory_pub);
+                    start_plan = true;
+                }else{
+                    static int i = 0;
+                    if( i < (int)tra.size()){
+                        tra_generation_pub.publish(tra[i]);
+                        geometry_msgs::Point temp_point;
+                        temp_point.x = px4_pose.pose.position.x;
+                        temp_point.y = px4_pose.pose.position.y;
+                        temp_point.z = px4_pose.pose.position.z;
+                        real_trajectory_marker.points.push_back(temp_point);
+                        realTrajectory_pub.publish(real_trajectory_marker);
+                        i++;
+                    }else{
+                        i = 0;
+                        start_plan = false;
+                        landing_state = 0;
+                        cmd_state = 0;
+                        goal_set = false;
+                        std::cout<< "landing complete" <<endl;
+                    }
+                }
+                break;
+            default:
+                break;
+            }
+            
+            break;
         }
         ros::spinOnce();
         ros::Rate(100).sleep();

@@ -151,6 +151,8 @@ visualization_msgs/MarkerArray.h
 -
 visualization_msgs/Marker.h
 -
+std_msgs/Bool.h
+-
 a_star/Astar_searcher.h
 /home/mm/catkin_ws/src/a_star/src/a_star/Astar_searcher.h
 a_star/backward.hpp
@@ -1201,6 +1203,22 @@ sensor_msgs/PointField.h
 -
 
 /opt/ros/noetic/include/sensor_msgs/PointField.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
+/opt/ros/noetic/include/std_msgs/Bool.h
 string
 -
 vector

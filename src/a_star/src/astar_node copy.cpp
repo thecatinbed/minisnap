@@ -117,6 +117,7 @@ void goalPointCallback(const geometry_msgs::Point::ConstPtr &point){
     }
     
 }
+
 void visGridPath( vector<Vector3d> nodes, ros::Publisher _grid_path_vis_pub)
 {   
     visualization_msgs::Marker node_vis; 

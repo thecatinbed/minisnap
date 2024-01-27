@@ -350,6 +350,7 @@ void planner::draw_desire_trajectory_marker(ros::Publisher despath_pub){
     marker.color.g = 0.0;
     marker.color.b = 0.0;
     marker.color.a = 1.0;
+    marker.points.clear();
     for (int i = 0; i < time_everytraj.size(); i++) 
     {
         for (double t = 0.0; t < time_everytraj(i); t += 0.01) 

@@ -83,6 +83,7 @@ a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/r
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/Image.h
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/PointCloud2.h
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/PointField.h
+a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/std_msgs/Bool.h
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/std_msgs/ColorRGBA.h
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
 a_star/CMakeFiles/astar_node.dir/src/astar_node.cpp.o: /opt/ros/noetic/include/visualization_msgs/Marker.h
