@@ -22,5 +22,6 @@ int main(int argc, char** argv){
     cout << "vel:" << vel_ << endl;
     cout << "acc:" << acc_ << endl;
     cout << "jerk:" << jerk_ << endl;
+    ROS_INFO("null");
     return 0;
 }
