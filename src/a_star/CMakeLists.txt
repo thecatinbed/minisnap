@@ -151,6 +151,9 @@ add_executable(minisnap_node src/minisnap_node.cpp)
 add_executable(pub_point_node src/pub_point_node.cpp)
 add_executable(astar_node src/astar_node.cpp)
 add_executable(keyboard_input_node src/keyboard_input_node.cpp)
+
+add_executable(planner_function_test_node src/planner_function_test_node.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -170,6 +173,7 @@ target_link_libraries(minisnap_node planner trajectory_generator ${catkin_LIBRAR
 target_link_libraries(pub_point_node ${catkin_LIBRARIES})
 target_link_libraries(astar_node Astar_searcher planner trajectory_generator ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(keyboard_input_node ${catkin_LIBRARIES})
+target_link_libraries(planner_function_test_node planner trajectory_generator ${catkin_LIBRARIES})
 
 #############
 ## Install ##

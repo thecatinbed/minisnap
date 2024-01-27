@@ -1286,6 +1286,19 @@ pub_point_node/fast:
 .PHONY : pub_point_node/fast
 
 #=============================================================================
+# Target rules for targets named planner_function_test_node
+
+# Build rule for target.
+planner_function_test_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 planner_function_test_node
+.PHONY : planner_function_test_node
+
+# fast build rule for target.
+planner_function_test_node/fast:
+	$(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/build
+.PHONY : planner_function_test_node/fast
+
+#=============================================================================
 # Target rules for targets named minisnap_node
 
 # Build rule for target.
@@ -2606,6 +2619,7 @@ help:
 	@echo "... keyboard_input_node"
 	@echo "... astar_node"
 	@echo "... pub_point_node"
+	@echo "... planner_function_test_node"
 	@echo "... minisnap_node"
 	@echo "... Astar_searcher"
 	@echo "... tf_generate_messages_py"

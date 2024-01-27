@@ -169,7 +169,7 @@ Eigen::Vector3d planner::getAccPoly(Eigen::MatrixXd polyCoeff, int k, double t)
             if (j == 0 || j == 1)
                 times(j) = 0;
             else if(j == 2)
-                times(j) = 1;
+                times(j) = 2;
             else
                 times(j) = j * (j-1) * pow(t, j-2);
         double temp_acc = 0.0;
@@ -208,7 +208,7 @@ Eigen::Vector3d planner::getJerkPoly(Eigen::MatrixXd polyCoeff, int k, double t)
             if (j == 0 || j == 1 || j == 2) 
                 times(j) = 0;
             else if(j == 3)
-                times(j) = 1;
+                times(j) = 6;
             else
                 times(j) = j * (j-1) * (j-2) * pow(t, j-3);
         double temp_jerk = 0.0;
@@ -283,6 +283,8 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
             //将轨迹压入到容器当中
             //tra_generation_pub.publish(trajectory);
             //cout << trajectory << endl;
+            // cout << "positon:" << trajectory.position << endl;
+            // cout << "velocity:" << trajectory.velocity << endl;
             trajectory_vector.push_back(trajectory);
         }
         trajectory.header.stamp = trajectory.header.stamp + offset;

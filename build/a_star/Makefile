@@ -213,6 +213,21 @@ pub_point_node/fast:
 .PHONY : pub_point_node/fast
 
 # Convenience name for target.
+a_star/CMakeFiles/planner_function_test_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/planner_function_test_node.dir/rule
+.PHONY : a_star/CMakeFiles/planner_function_test_node.dir/rule
+
+# Convenience name for target.
+planner_function_test_node: a_star/CMakeFiles/planner_function_test_node.dir/rule
+
+.PHONY : planner_function_test_node
+
+# fast build rule for target.
+planner_function_test_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/build
+.PHONY : planner_function_test_node/fast
+
+# Convenience name for target.
 a_star/CMakeFiles/minisnap_node.dir/rule:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 a_star/CMakeFiles/minisnap_node.dir/rule
 .PHONY : a_star/CMakeFiles/minisnap_node.dir/rule
@@ -350,6 +365,33 @@ src/minisnap_node.cpp.s:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.s
 .PHONY : src/minisnap_node.cpp.s
 
+src/planner_function_test_node.o: src/planner_function_test_node.cpp.o
+
+.PHONY : src/planner_function_test_node.o
+
+# target to build an object file
+src/planner_function_test_node.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/src/planner_function_test_node.cpp.o
+.PHONY : src/planner_function_test_node.cpp.o
+
+src/planner_function_test_node.i: src/planner_function_test_node.cpp.i
+
+.PHONY : src/planner_function_test_node.i
+
+# target to preprocess a source file
+src/planner_function_test_node.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/src/planner_function_test_node.cpp.i
+.PHONY : src/planner_function_test_node.cpp.i
+
+src/planner_function_test_node.s: src/planner_function_test_node.cpp.s
+
+.PHONY : src/planner_function_test_node.s
+
+# target to generate assembly for a file
+src/planner_function_test_node.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/src/planner_function_test_node.cpp.s
+.PHONY : src/planner_function_test_node.cpp.s
+
 src/pub_point_node.o: src/pub_point_node.cpp.o
 
 .PHONY : src/pub_point_node.o
@@ -393,6 +435,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... pub_point_node"
+	@echo "... planner_function_test_node"
 	@echo "... minisnap_node"
 	@echo "... Astar_searcher"
 	@echo "... src/Astar_searcher.o"
@@ -407,6 +450,9 @@ help:
 	@echo "... src/minisnap_node.o"
 	@echo "... src/minisnap_node.i"
 	@echo "... src/minisnap_node.s"
+	@echo "... src/planner_function_test_node.o"
+	@echo "... src/planner_function_test_node.i"
+	@echo "... src/planner_function_test_node.s"
 	@echo "... src/pub_point_node.o"
 	@echo "... src/pub_point_node.i"
 	@echo "... src/pub_point_node.s"

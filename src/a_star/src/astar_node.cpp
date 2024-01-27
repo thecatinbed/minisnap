@@ -357,7 +357,7 @@ int main(int argc, char** argv){
                 if(!start_plan){
                     myplanner.dot_num = 2;
                     myplanner.time_everytraj.resize(1);
-                    myplanner.time_everytraj(0) = 25;
+                    myplanner.time_everytraj(0) = 10;
                     myplanner.route.resize(2, 3);
                     myplanner.route(0,0) = px4_pose.pose.position.x;
                     myplanner.route(0,1) = px4_pose.pose.position.y;
@@ -395,7 +395,7 @@ int main(int argc, char** argv){
                 if(!start_plan){
                     myplanner.dot_num = 2;
                     myplanner.time_everytraj.resize(1);
-                    myplanner.time_everytraj(0) = 25;
+                    myplanner.time_everytraj(0) = 10;
                     myplanner.route.resize(2, 3);
                     myplanner.route(0,0) = px4_pose.pose.position.x;
                     myplanner.route(0,1) = px4_pose.pose.position.y;
@@ -432,7 +432,7 @@ int main(int argc, char** argv){
                 if(!start_plan){
                     myplanner.dot_num = 2;
                     myplanner.time_everytraj.resize(1);
-                    myplanner.time_everytraj(0) = 25;
+                    myplanner.time_everytraj(0) = 10;
                     myplanner.route.resize(2, 3);
                     myplanner.route(0,0) = px4_pose.pose.position.x;
                     myplanner.route(0,1) = px4_pose.pose.position.y;

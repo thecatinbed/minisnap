@@ -147,6 +147,7 @@
 /home/mm/catkin_ws/build/a_star/CMakeFiles/list_install_components.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/rebuild_cache.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/pub_point_node.dir
+/home/mm/catkin_ws/build/a_star/CMakeFiles/planner_function_test_node.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/minisnap_node.dir
 /home/mm/catkin_ws/build/a_star/CMakeFiles/Astar_searcher.dir
 /home/mm/catkin_ws/build/Utils/odom_visualization/CMakeFiles/install/strip.dir
