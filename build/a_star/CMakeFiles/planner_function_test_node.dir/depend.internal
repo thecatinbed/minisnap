@@ -4,8 +4,8 @@
 a_star/CMakeFiles/planner_function_test_node.dir/src/planner_function_test_node.cpp.o
  /home/mm/catkin_ws/devel/include/quadrotor_msgs/PositionCommand.h
  /home/mm/catkin_ws/src/a_star/src/planner_function_test_node.cpp
+ /home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap.h
  /home/mm/catkin_ws/src/minisnap/include/minisnap/planner.h
- /home/mm/catkin_ws/src/minisnap/include/minisnap/trajectory_generator.h
  /opt/ros/noetic/include/geometry_msgs/Point.h
  /opt/ros/noetic/include/geometry_msgs/PointStamped.h
  /opt/ros/noetic/include/geometry_msgs/Pose.h

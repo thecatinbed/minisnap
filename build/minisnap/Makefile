@@ -56,6 +56,18 @@ CMAKE_BINARY_DIR = /home/mm/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -67,28 +79,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # Special rule for the target install
 install: preinstall
@@ -123,17 +113,27 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
 
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,79 +168,34 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-minisnap/CMakeFiles/PID_tuning.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/PID_tuning.dir/rule
-.PHONY : minisnap/CMakeFiles/PID_tuning.dir/rule
+minisnap/CMakeFiles/minisnap_node.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/minisnap_node.dir/rule
+.PHONY : minisnap/CMakeFiles/minisnap_node.dir/rule
 
 # Convenience name for target.
-PID_tuning: minisnap/CMakeFiles/PID_tuning.dir/rule
+minisnap_node: minisnap/CMakeFiles/minisnap_node.dir/rule
 
-.PHONY : PID_tuning
+.PHONY : minisnap_node
 
 # fast build rule for target.
-PID_tuning/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/PID_tuning.dir/build.make minisnap/CMakeFiles/PID_tuning.dir/build
-.PHONY : PID_tuning/fast
+minisnap_node/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap_node.dir/build.make minisnap/CMakeFiles/minisnap_node.dir/build
+.PHONY : minisnap_node/fast
 
 # Convenience name for target.
-minisnap/CMakeFiles/control_node.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/control_node.dir/rule
-.PHONY : minisnap/CMakeFiles/control_node.dir/rule
+minisnap/CMakeFiles/minisnap.dir/rule:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/minisnap.dir/rule
+.PHONY : minisnap/CMakeFiles/minisnap.dir/rule
 
 # Convenience name for target.
-control_node: minisnap/CMakeFiles/control_node.dir/rule
+minisnap: minisnap/CMakeFiles/minisnap.dir/rule
 
-.PHONY : control_node
+.PHONY : minisnap
 
 # fast build rule for target.
-control_node/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/control_node.dir/build.make minisnap/CMakeFiles/control_node.dir/build
-.PHONY : control_node/fast
-
-# Convenience name for target.
-minisnap/CMakeFiles/trajec_node.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/trajec_node.dir/rule
-.PHONY : minisnap/CMakeFiles/trajec_node.dir/rule
-
-# Convenience name for target.
-trajec_node: minisnap/CMakeFiles/trajec_node.dir/rule
-
-.PHONY : trajec_node
-
-# fast build rule for target.
-trajec_node/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajec_node.dir/build.make minisnap/CMakeFiles/trajec_node.dir/build
-.PHONY : trajec_node/fast
-
-# Convenience name for target.
-minisnap/CMakeFiles/circle_example.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/circle_example.dir/rule
-.PHONY : minisnap/CMakeFiles/circle_example.dir/rule
-
-# Convenience name for target.
-circle_example: minisnap/CMakeFiles/circle_example.dir/rule
-
-.PHONY : circle_example
-
-# fast build rule for target.
-circle_example/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/circle_example.dir/build.make minisnap/CMakeFiles/circle_example.dir/build
-.PHONY : circle_example/fast
-
-# Convenience name for target.
-minisnap/CMakeFiles/trajectory_generator.dir/rule:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 minisnap/CMakeFiles/trajectory_generator.dir/rule
-.PHONY : minisnap/CMakeFiles/trajectory_generator.dir/rule
-
-# Convenience name for target.
-trajectory_generator: minisnap/CMakeFiles/trajectory_generator.dir/rule
-
-.PHONY : trajectory_generator
-
-# fast build rule for target.
-trajectory_generator/fast:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajectory_generator.dir/build.make minisnap/CMakeFiles/trajectory_generator.dir/build
-.PHONY : trajectory_generator/fast
+minisnap/fast:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap.dir/build.make minisnap/CMakeFiles/minisnap.dir/build
+.PHONY : minisnap/fast
 
 # Convenience name for target.
 minisnap/CMakeFiles/planner.dir/rule:
@@ -257,86 +212,59 @@ planner/fast:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/planner.dir/build.make minisnap/CMakeFiles/planner.dir/build
 .PHONY : planner/fast
 
-src/PID_tuning.o: src/PID_tuning.cpp.o
+src/minisnap.o: src/minisnap.cpp.o
 
-.PHONY : src/PID_tuning.o
-
-# target to build an object file
-src/PID_tuning.cpp.o:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/PID_tuning.dir/build.make minisnap/CMakeFiles/PID_tuning.dir/src/PID_tuning.cpp.o
-.PHONY : src/PID_tuning.cpp.o
-
-src/PID_tuning.i: src/PID_tuning.cpp.i
-
-.PHONY : src/PID_tuning.i
-
-# target to preprocess a source file
-src/PID_tuning.cpp.i:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/PID_tuning.dir/build.make minisnap/CMakeFiles/PID_tuning.dir/src/PID_tuning.cpp.i
-.PHONY : src/PID_tuning.cpp.i
-
-src/PID_tuning.s: src/PID_tuning.cpp.s
-
-.PHONY : src/PID_tuning.s
-
-# target to generate assembly for a file
-src/PID_tuning.cpp.s:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/PID_tuning.dir/build.make minisnap/CMakeFiles/PID_tuning.dir/src/PID_tuning.cpp.s
-.PHONY : src/PID_tuning.cpp.s
-
-src/circle_example.o: src/circle_example.cpp.o
-
-.PHONY : src/circle_example.o
+.PHONY : src/minisnap.o
 
 # target to build an object file
-src/circle_example.cpp.o:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/circle_example.dir/build.make minisnap/CMakeFiles/circle_example.dir/src/circle_example.cpp.o
-.PHONY : src/circle_example.cpp.o
+src/minisnap.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap.dir/build.make minisnap/CMakeFiles/minisnap.dir/src/minisnap.cpp.o
+.PHONY : src/minisnap.cpp.o
 
-src/circle_example.i: src/circle_example.cpp.i
+src/minisnap.i: src/minisnap.cpp.i
 
-.PHONY : src/circle_example.i
+.PHONY : src/minisnap.i
 
 # target to preprocess a source file
-src/circle_example.cpp.i:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/circle_example.dir/build.make minisnap/CMakeFiles/circle_example.dir/src/circle_example.cpp.i
-.PHONY : src/circle_example.cpp.i
+src/minisnap.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap.dir/build.make minisnap/CMakeFiles/minisnap.dir/src/minisnap.cpp.i
+.PHONY : src/minisnap.cpp.i
 
-src/circle_example.s: src/circle_example.cpp.s
+src/minisnap.s: src/minisnap.cpp.s
 
-.PHONY : src/circle_example.s
+.PHONY : src/minisnap.s
 
 # target to generate assembly for a file
-src/circle_example.cpp.s:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/circle_example.dir/build.make minisnap/CMakeFiles/circle_example.dir/src/circle_example.cpp.s
-.PHONY : src/circle_example.cpp.s
+src/minisnap.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap.dir/build.make minisnap/CMakeFiles/minisnap.dir/src/minisnap.cpp.s
+.PHONY : src/minisnap.cpp.s
 
-src/control_node.o: src/control_node.cpp.o
+src/minisnap_node.o: src/minisnap_node.cpp.o
 
-.PHONY : src/control_node.o
+.PHONY : src/minisnap_node.o
 
 # target to build an object file
-src/control_node.cpp.o:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/control_node.dir/build.make minisnap/CMakeFiles/control_node.dir/src/control_node.cpp.o
-.PHONY : src/control_node.cpp.o
+src/minisnap_node.cpp.o:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap_node.dir/build.make minisnap/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o
+.PHONY : src/minisnap_node.cpp.o
 
-src/control_node.i: src/control_node.cpp.i
+src/minisnap_node.i: src/minisnap_node.cpp.i
 
-.PHONY : src/control_node.i
+.PHONY : src/minisnap_node.i
 
 # target to preprocess a source file
-src/control_node.cpp.i:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/control_node.dir/build.make minisnap/CMakeFiles/control_node.dir/src/control_node.cpp.i
-.PHONY : src/control_node.cpp.i
+src/minisnap_node.cpp.i:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap_node.dir/build.make minisnap/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.i
+.PHONY : src/minisnap_node.cpp.i
 
-src/control_node.s: src/control_node.cpp.s
+src/minisnap_node.s: src/minisnap_node.cpp.s
 
-.PHONY : src/control_node.s
+.PHONY : src/minisnap_node.s
 
 # target to generate assembly for a file
-src/control_node.cpp.s:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/control_node.dir/build.make minisnap/CMakeFiles/control_node.dir/src/control_node.cpp.s
-.PHONY : src/control_node.cpp.s
+src/minisnap_node.cpp.s:
+	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/minisnap_node.dir/build.make minisnap/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.s
+.PHONY : src/minisnap_node.cpp.s
 
 src/planner.o: src/planner.cpp.o
 
@@ -365,97 +293,31 @@ src/planner.cpp.s:
 	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/planner.dir/build.make minisnap/CMakeFiles/planner.dir/src/planner.cpp.s
 .PHONY : src/planner.cpp.s
 
-src/trajec_node.o: src/trajec_node.cpp.o
-
-.PHONY : src/trajec_node.o
-
-# target to build an object file
-src/trajec_node.cpp.o:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajec_node.dir/build.make minisnap/CMakeFiles/trajec_node.dir/src/trajec_node.cpp.o
-.PHONY : src/trajec_node.cpp.o
-
-src/trajec_node.i: src/trajec_node.cpp.i
-
-.PHONY : src/trajec_node.i
-
-# target to preprocess a source file
-src/trajec_node.cpp.i:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajec_node.dir/build.make minisnap/CMakeFiles/trajec_node.dir/src/trajec_node.cpp.i
-.PHONY : src/trajec_node.cpp.i
-
-src/trajec_node.s: src/trajec_node.cpp.s
-
-.PHONY : src/trajec_node.s
-
-# target to generate assembly for a file
-src/trajec_node.cpp.s:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajec_node.dir/build.make minisnap/CMakeFiles/trajec_node.dir/src/trajec_node.cpp.s
-.PHONY : src/trajec_node.cpp.s
-
-src/trajectory_generator.o: src/trajectory_generator.cpp.o
-
-.PHONY : src/trajectory_generator.o
-
-# target to build an object file
-src/trajectory_generator.cpp.o:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajectory_generator.dir/build.make minisnap/CMakeFiles/trajectory_generator.dir/src/trajectory_generator.cpp.o
-.PHONY : src/trajectory_generator.cpp.o
-
-src/trajectory_generator.i: src/trajectory_generator.cpp.i
-
-.PHONY : src/trajectory_generator.i
-
-# target to preprocess a source file
-src/trajectory_generator.cpp.i:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajectory_generator.dir/build.make minisnap/CMakeFiles/trajectory_generator.dir/src/trajectory_generator.cpp.i
-.PHONY : src/trajectory_generator.cpp.i
-
-src/trajectory_generator.s: src/trajectory_generator.cpp.s
-
-.PHONY : src/trajectory_generator.s
-
-# target to generate assembly for a file
-src/trajectory_generator.cpp.s:
-	cd /home/mm/catkin_ws/build && $(MAKE) -f minisnap/CMakeFiles/trajectory_generator.dir/build.make minisnap/CMakeFiles/trajectory_generator.dir/src/trajectory_generator.cpp.s
-.PHONY : src/trajectory_generator.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... PID_tuning"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... control_node"
-	@echo "... trajec_node"
-	@echo "... install/strip"
-	@echo "... circle_example"
-	@echo "... trajectory_generator"
+	@echo "... edit_cache"
+	@echo "... test"
+	@echo "... minisnap_node"
+	@echo "... minisnap"
 	@echo "... planner"
-	@echo "... src/PID_tuning.o"
-	@echo "... src/PID_tuning.i"
-	@echo "... src/PID_tuning.s"
-	@echo "... src/circle_example.o"
-	@echo "... src/circle_example.i"
-	@echo "... src/circle_example.s"
-	@echo "... src/control_node.o"
-	@echo "... src/control_node.i"
-	@echo "... src/control_node.s"
+	@echo "... src/minisnap.o"
+	@echo "... src/minisnap.i"
+	@echo "... src/minisnap.s"
+	@echo "... src/minisnap_node.o"
+	@echo "... src/minisnap_node.i"
+	@echo "... src/minisnap_node.s"
 	@echo "... src/planner.o"
 	@echo "... src/planner.i"
 	@echo "... src/planner.s"
-	@echo "... src/trajec_node.o"
-	@echo "... src/trajec_node.i"
-	@echo "... src/trajec_node.s"
-	@echo "... src/trajectory_generator.o"
-	@echo "... src/trajectory_generator.i"
-	@echo "... src/trajectory_generator.s"
 .PHONY : help
 
 

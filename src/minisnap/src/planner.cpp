@@ -58,12 +58,8 @@ Eigen::MatrixXd planner::getcoeff(void)
     static Eigen::MatrixXd polycoeff;
     Eigen::MatrixXd vel = Eigen::MatrixXd::Zero(2, 3);
     Eigen::MatrixXd acc = Eigen::MatrixXd::Zero(2, 3);
-    TrajectoryGeneratorTool TrajectoryGeneratorTool;
-    //getparam();
-    //ROS_INFO("before solving QP");
+    Minisnap TrajectoryGeneratorTool;
     polycoeff = TrajectoryGeneratorTool.SolveQPClosedForm(mode, route, vel, acc, time_everytraj);
-    //std::cout << polycoeff << endl;
-    //std::cout << "poly_coeff:" << std::endl << polycoeff << std::endl;
     return polycoeff; 
 }
 

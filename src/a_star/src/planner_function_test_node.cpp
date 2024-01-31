@@ -10,10 +10,10 @@ int main(int argc, char** argv){
     ros::init(argc, argv,"planner_function_test_node");
     planner myplanner;
     MatrixXd coeff = MatrixXd::Zero(1,24);
-    coeff(0,0) = 1;
-    coeff(0,1) = 1;
-    coeff(0,2) = 1;
-    coeff(0,3) = 1;
+    coeff(0,4) = 1;
+    coeff(0,5) = 1;
+    coeff(0,6) = 1;
+    coeff(0,7) = 1;
     Vector3d pos_ = myplanner.getPosPoly(coeff,0,1);
     Vector3d vel_ = myplanner.getVelPoly(coeff,0,1);
     Vector3d acc_ = myplanner.getAccPoly(coeff,0,1);

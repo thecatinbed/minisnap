@@ -32,6 +32,14 @@ geometry_msgs/Vector3.h
 geometry_msgs/Vector3.h
 -
 
+/home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap.h
+Eigen/Eigen
+-
+vector
+-
+ros/ros.h
+-
+
 /home/mm/catkin_ws/src/minisnap/include/minisnap/planner.h
 ros/ros.h
 -
@@ -47,17 +55,9 @@ nav_msgs/Path.h
 -
 quadrotor_msgs/PositionCommand.h
 -
-minisnap/trajectory_generator.h
-/home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap/trajectory_generator.h
+minisnap/minisnap.h
+/home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap/minisnap.h
 visualization_msgs/Marker.h
--
-
-/home/mm/catkin_ws/src/minisnap/include/minisnap/trajectory_generator.h
-Eigen/Eigen
--
-vector
--
-ros/ros.h
 -
 
 /home/mm/catkin_ws/src/minisnap/src/trajec_node.cpp

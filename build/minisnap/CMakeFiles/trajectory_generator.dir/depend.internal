@@ -3,6 +3,7 @@
 
 minisnap/CMakeFiles/trajectory_generator.dir/src/trajectory_generator.cpp.o
  /home/mm/catkin_ws/devel/include/quadrotor_msgs/PositionCommand.h
+ /home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap.h
  /home/mm/catkin_ws/src/minisnap/include/minisnap/planner.h
  /home/mm/catkin_ws/src/minisnap/include/minisnap/trajectory_generator.h
  /home/mm/catkin_ws/src/minisnap/src/trajectory_generator.cpp

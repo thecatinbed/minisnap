@@ -47,29 +47,31 @@ void PX4CtrlFSM::process()
 
     static bool init_complete = false;
 
-    // if(param.takeoff_land.no_RC) {
-    //     rc_dy_data.enter_command_mode = dy_data.enter_command_mode;
-    //     rc_dy_data.enter_hover_mode = dy_data.enter_hover_mode;
-    //     rc_dy_data.is_command_mode = dy_data.is_command_mode;
-    //     rc_dy_data.is_hover_mode = dy_data.is_hover_mode;
-    //     rc_dy_data.toggle_reboot = dy_data.toggle_reboot;
+
+    if(param.takeoff_land.no_RC) {
+        // rc_dy_data.enter_command_mode = dy_data.enter_command_mode;
+        // rc_dy_data.enter_hover_mode = dy_data.enter_hover_mode;
+        // rc_dy_data.is_command_mode = dy_data.is_command_mode;
+        // rc_dy_data.is_hover_mode = dy_data.is_hover_mode;
+        // rc_dy_data.toggle_reboot = dy_data.toggle_reboot;
+        if(init_complete == false){
+            init_complete = true;
+            rc_dy_data.enter_command_mode = true;
+            rc_dy_data.enter_hover_mode = true;
+            rc_dy_data.is_command_mode = true;
+            rc_dy_data.is_hover_mode = true;
+            rc_dy_data.toggle_reboot = false;
+            ROS_INFO("init once");
+        }
         
-    // } else {
-    //     rc_dy_data.enter_command_mode = rc_data.enter_command_mode;
-    //     rc_dy_data.enter_hover_mode = rc_data.enter_hover_mode;
-    //     rc_dy_data.is_command_mode = rc_data.is_command_mode;
-    //     rc_dy_data.is_hover_mode = rc_data.is_hover_mode;
-    //     rc_dy_data.toggle_reboot = rc_data.toggle_reboot;
-    // }
-    if(init_complete == false){
-        init_complete = true;
-        rc_dy_data.enter_command_mode = true;
-        rc_dy_data.enter_hover_mode = true;
-        rc_dy_data.is_command_mode = true;
-        rc_dy_data.is_hover_mode = true;
-        rc_dy_data.toggle_reboot = false;
+    } else {
+        rc_dy_data.enter_command_mode = rc_data.enter_command_mode;
+        rc_dy_data.enter_hover_mode = rc_data.enter_hover_mode;
+        rc_dy_data.is_command_mode = rc_data.is_command_mode;
+        rc_dy_data.is_hover_mode = rc_data.is_hover_mode;
+        rc_dy_data.toggle_reboot = rc_data.toggle_reboot;
     }
-    
+    //state = CMD_CTRL;
     // STEP1: state machine runs
     switch (state)
     {
@@ -77,6 +79,7 @@ void PX4CtrlFSM::process()
     {
         if (rc_dy_data.enter_hover_mode) // Try to jump to AUTO_HOVER
         {
+            ROS_INFO("enter_hover_mode is true");
             if (!odom_is_received(now_time)) {
 
                 ROS_ERROR("[px4ctrl] Reject AUTO_HOVER(L2). No odom!");
@@ -100,9 +103,8 @@ void PX4CtrlFSM::process()
 
             ROS_INFO("\033[32m[px4ctrl] MANUAL_CTRL(L1) --> AUTO_HOVER(L2)\033[32m");
         }
-        else if (param.takeoff_land.enable && takeoff_land_data.triggered && 
-            takeoff_land_data.takeoff_land_cmd == quadrotor_msgs::TakeoffLand::TAKEOFF) {// Try to jump to AUTO_TAKEOFF
-        
+        else if ((param.takeoff_land.enable && takeoff_land_data.triggered && 
+            takeoff_land_data.takeoff_land_cmd == quadrotor_msgs::TakeoffLand::TAKEOFF)) {// Try to jump to AUTO_TAKEOFF
             if (!odom_is_received(now_time)) {
                 ROS_ERROR("[px4ctrl] Reject AUTO_TAKEOFF. No odom!");
                 break;
@@ -196,12 +198,13 @@ void PX4CtrlFSM::process()
             des = get_hover_des();
             if ((rc_dy_data.enter_command_mode) ||
                 (takeoff_land.delay_trigger.first && now_time > takeoff_land.delay_trigger.second)) {
+                rc_dy_data.enter_command_mode = false;
                 if (param.leader) {
                     takeoff_land.delay_trigger.first = false;
                     publish_trigger(odom_data.msg);
                     ROS_INFO("\033[32m[px4ctrl] TRIGGER sent, allow user command.\033[32m");    
                 }
-                rc_dy_data.enter_command_mode = false;
+                
             }
 
             // cout << "des.p=" << des.p.transpose() << endl;
@@ -212,13 +215,13 @@ void PX4CtrlFSM::process()
 
     case CMD_CTRL:
     {
-        if (!rc_dy_data.is_hover_mode || !odom_is_received(now_time)) {
+        if ((!rc_dy_data.is_hover_mode || !odom_is_received(now_time))) {
 
             state = MANUAL_CTRL;
             toggle_offboard_mode(false);
 
             ROS_WARN("[px4ctrl] From CMD_CTRL(L3) to MANUAL_CTRL(L1)!");
-        } else if (!rc_dy_data.is_command_mode || !cmd_is_received(now_time)) {
+        } else if ((!rc_dy_data.is_command_mode || !cmd_is_received(now_time))) {
 
             state = AUTO_HOVER;
             set_hov_with_odom();
@@ -229,7 +232,6 @@ void PX4CtrlFSM::process()
         {
             des = get_cmd_des();
         }
-
         if (takeoff_land_data.triggered && takeoff_land_data.takeoff_land_cmd == quadrotor_msgs::TakeoffLand::LAND) {
             ROS_ERROR("[px4ctrl] Reject AUTO_LAND, which must be triggered in AUTO_HOVER. \
                     Stop sending control commands for longer than %fs to let px4ctrl return to AUTO_HOVER first.",
@@ -245,8 +247,8 @@ void PX4CtrlFSM::process()
             AutoTakeoffLand_t::MOTORS_SPEEDUP_TIME) {// Wait for several seconds to warn prople.
         
             des = get_rotor_speed_up_des(now_time);
-        } else if (odom_data.p(2) >= 
-            (takeoff_land.start_pose(2) + param.takeoff_land.height)) {// reach the desired height
+        } else if ((odom_data.p(2) >= 
+            (takeoff_land.start_pose(2) + param.takeoff_land.height))) {// reach the desired height
         
             state = AUTO_HOVER;
             set_hov_with_odom();
@@ -324,9 +326,7 @@ void PX4CtrlFSM::process()
     } else {
 
         // controller.calculateControl(des, odom_data, imu_data, u);
-        // debug_msg = controller.calculateControl(des, odom_data, imu_data, u);   //计算角度
-        debug_msg = controller.DLQR_Control(des, odom_data, imu_data, u);   //计算角度
-        
+        debug_msg = controller.calculateControl(des, odom_data, imu_data, u);   //计算角度
         debug_msg.header.stamp = now_time;
         if (param.debug) {
             debug_pub.publish(debug_msg);

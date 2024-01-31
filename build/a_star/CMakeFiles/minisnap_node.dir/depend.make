@@ -3,8 +3,8 @@
 
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /home/mm/catkin_ws/devel/include/quadrotor_msgs/PositionCommand.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /home/mm/catkin_ws/src/a_star/src/minisnap_node.cpp
+a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /home/mm/catkin_ws/src/minisnap/include/minisnap/minisnap.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /home/mm/catkin_ws/src/minisnap/include/minisnap/planner.h
-a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /home/mm/catkin_ws/src/minisnap/include/minisnap/trajectory_generator.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/geometry_msgs/PointStamped.h
 a_star/CMakeFiles/minisnap_node.dir/src/minisnap_node.cpp.o: /opt/ros/noetic/include/geometry_msgs/Pose.h

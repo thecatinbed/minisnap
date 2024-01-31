@@ -3,6 +3,6 @@ prefix=/home/mm/catkin_ws/devel
 Name: rviz-3d-nav-goal-tool
 Description: Description of rviz-3d-nav-goal-tool
 Version: 0.0.0
-Cflags: -I/home/mm/catkin_ws/src/rviz-3d-nav-goal-tool/include
+Cflags: -I/home/mm/catkin_ws/src/Utils/rviz-3d-nav-goal-tool/include
 Libs: -L${prefix}/lib 
 Requires: 

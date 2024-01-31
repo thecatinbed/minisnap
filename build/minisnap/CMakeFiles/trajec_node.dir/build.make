@@ -80,7 +80,7 @@ trajec_node_EXTERNAL_OBJECTS =
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: minisnap/CMakeFiles/trajec_node.dir/src/trajec_node.cpp.o
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: minisnap/CMakeFiles/trajec_node.dir/build.make
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /home/mm/catkin_ws/devel/lib/libplanner.so
-/home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /home/mm/catkin_ws/devel/lib/libtrajectory_generator.so
+/home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /home/mm/catkin_ws/devel/lib/libminisnap.so
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /opt/ros/noetic/lib/libroscpp.so
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/mm/catkin_ws/devel/lib/minisnap/trajec_node: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0

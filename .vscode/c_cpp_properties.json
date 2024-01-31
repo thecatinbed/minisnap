@@ -16,7 +16,9 @@
                 "/home/mm/catkin_ws/src/Utils/uav_utils/include/**",
                 "/usr/include/**",
                 "${workspaceFolder}/src/a_star/include",
-                "${workspaceFolder}/src/rviz-3d-nav-goal-tool/include"
+                "${workspaceFolder}/src/Utils/rviz-3d-nav-goal-tool/include",
+                "${workspaceFolder}/devel/include",
+                "${workspaceFolder}/src/minisnap/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

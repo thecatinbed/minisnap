@@ -49,9 +49,9 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-   FILES
-)
+# add_message_files(
+#    FILES
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -125,25 +125,21 @@ add_library(planner
   include/minisnap/planner.h
   src/planner.cpp
 )
-add_library(trajectory_generator
-  include/minisnap/trajectory_generator.h
-  src/trajectory_generator.cpp
+add_library(minisnap
+  include/minisnap/minisnap.h
+  src/minisnap.cpp
 )
-
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 add_dependencies(planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(trajectory_generator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(minisnap ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(circle_example src/circle_example.cpp)
-add_executable(trajec_node src/trajec_node.cpp)
-add_executable(control_node src/control_node.cpp)
-add_executable(PID_tuning src/PID_tuning.cpp)
+add_executable(minisnap_node src/minisnap_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -153,15 +149,11 @@ add_executable(PID_tuning src/PID_tuning.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(trajec_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(minisnap_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(minisnap_node planner minisnap  ${catkin_LIBRARIES})
 
-target_link_libraries(circle_example   ${catkin_LIBRARIES})
-target_link_libraries(trajec_node planner trajectory_generator  ${catkin_LIBRARIES})
-target_link_libraries(control_node  ${catkin_LIBRARIES})
-target_link_libraries(PID_tuning  ${catkin_LIBRARIES})
 
 #############
 ## Install ##

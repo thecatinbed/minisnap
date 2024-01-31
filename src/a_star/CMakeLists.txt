@@ -147,11 +147,9 @@ add_dependencies(Astar_searcher ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXP
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/a_star_node.cpp)
-add_executable(minisnap_node src/minisnap_node.cpp)
-add_executable(pub_point_node src/pub_point_node.cpp)
+
 add_executable(astar_node src/astar_node.cpp)
 add_executable(keyboard_input_node src/keyboard_input_node.cpp)
-
 add_executable(planner_function_test_node src/planner_function_test_node.cpp)
 
 ## Rename C++ executable without prefix
@@ -168,12 +166,9 @@ add_executable(planner_function_test_node src/planner_function_test_node.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(Astar_searcher ${catkin_LIBRARIES})
-target_link_libraries(minisnap_node planner trajectory_generator ${catkin_LIBRARIES})
-target_link_libraries(pub_point_node ${catkin_LIBRARIES})
-target_link_libraries(astar_node Astar_searcher planner trajectory_generator ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(astar_node Astar_searcher planner minisnap ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(keyboard_input_node ${catkin_LIBRARIES})
-target_link_libraries(planner_function_test_node planner trajectory_generator ${catkin_LIBRARIES})
+target_link_libraries(planner_function_test_node planner minisnap ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -1169,69 +1169,30 @@ _quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory/fast:
 .PHONY : _quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory/fast
 
 #=============================================================================
-# Target rules for targets named PID_tuning
+# Target rules for targets named minisnap_node
 
 # Build rule for target.
-PID_tuning: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PID_tuning
-.PHONY : PID_tuning
+minisnap_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 minisnap_node
+.PHONY : minisnap_node
 
 # fast build rule for target.
-PID_tuning/fast:
-	$(MAKE) -f minisnap/CMakeFiles/PID_tuning.dir/build.make minisnap/CMakeFiles/PID_tuning.dir/build
-.PHONY : PID_tuning/fast
+minisnap_node/fast:
+	$(MAKE) -f minisnap/CMakeFiles/minisnap_node.dir/build.make minisnap/CMakeFiles/minisnap_node.dir/build
+.PHONY : minisnap_node/fast
 
 #=============================================================================
-# Target rules for targets named control_node
+# Target rules for targets named minisnap
 
 # Build rule for target.
-control_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 control_node
-.PHONY : control_node
+minisnap: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 minisnap
+.PHONY : minisnap
 
 # fast build rule for target.
-control_node/fast:
-	$(MAKE) -f minisnap/CMakeFiles/control_node.dir/build.make minisnap/CMakeFiles/control_node.dir/build
-.PHONY : control_node/fast
-
-#=============================================================================
-# Target rules for targets named trajec_node
-
-# Build rule for target.
-trajec_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 trajec_node
-.PHONY : trajec_node
-
-# fast build rule for target.
-trajec_node/fast:
-	$(MAKE) -f minisnap/CMakeFiles/trajec_node.dir/build.make minisnap/CMakeFiles/trajec_node.dir/build
-.PHONY : trajec_node/fast
-
-#=============================================================================
-# Target rules for targets named circle_example
-
-# Build rule for target.
-circle_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 circle_example
-.PHONY : circle_example
-
-# fast build rule for target.
-circle_example/fast:
-	$(MAKE) -f minisnap/CMakeFiles/circle_example.dir/build.make minisnap/CMakeFiles/circle_example.dir/build
-.PHONY : circle_example/fast
-
-#=============================================================================
-# Target rules for targets named trajectory_generator
-
-# Build rule for target.
-trajectory_generator: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 trajectory_generator
-.PHONY : trajectory_generator
-
-# fast build rule for target.
-trajectory_generator/fast:
-	$(MAKE) -f minisnap/CMakeFiles/trajectory_generator.dir/build.make minisnap/CMakeFiles/trajectory_generator.dir/build
-.PHONY : trajectory_generator/fast
+minisnap/fast:
+	$(MAKE) -f minisnap/CMakeFiles/minisnap.dir/build.make minisnap/CMakeFiles/minisnap.dir/build
+.PHONY : minisnap/fast
 
 #=============================================================================
 # Target rules for targets named planner
@@ -1245,6 +1206,19 @@ planner: cmake_check_build_system
 planner/fast:
 	$(MAKE) -f minisnap/CMakeFiles/planner.dir/build.make minisnap/CMakeFiles/planner.dir/build
 .PHONY : planner/fast
+
+#=============================================================================
+# Target rules for targets named planner_function_test_node
+
+# Build rule for target.
+planner_function_test_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 planner_function_test_node
+.PHONY : planner_function_test_node
+
+# fast build rule for target.
+planner_function_test_node/fast:
+	$(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/build
+.PHONY : planner_function_test_node/fast
 
 #=============================================================================
 # Target rules for targets named keyboard_input_node
@@ -1271,45 +1245,6 @@ astar_node: cmake_check_build_system
 astar_node/fast:
 	$(MAKE) -f a_star/CMakeFiles/astar_node.dir/build.make a_star/CMakeFiles/astar_node.dir/build
 .PHONY : astar_node/fast
-
-#=============================================================================
-# Target rules for targets named pub_point_node
-
-# Build rule for target.
-pub_point_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pub_point_node
-.PHONY : pub_point_node
-
-# fast build rule for target.
-pub_point_node/fast:
-	$(MAKE) -f a_star/CMakeFiles/pub_point_node.dir/build.make a_star/CMakeFiles/pub_point_node.dir/build
-.PHONY : pub_point_node/fast
-
-#=============================================================================
-# Target rules for targets named planner_function_test_node
-
-# Build rule for target.
-planner_function_test_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 planner_function_test_node
-.PHONY : planner_function_test_node
-
-# fast build rule for target.
-planner_function_test_node/fast:
-	$(MAKE) -f a_star/CMakeFiles/planner_function_test_node.dir/build.make a_star/CMakeFiles/planner_function_test_node.dir/build
-.PHONY : planner_function_test_node/fast
-
-#=============================================================================
-# Target rules for targets named minisnap_node
-
-# Build rule for target.
-minisnap_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 minisnap_node
-.PHONY : minisnap_node
-
-# fast build rule for target.
-minisnap_node/fast:
-	$(MAKE) -f a_star/CMakeFiles/minisnap_node.dir/build.make a_star/CMakeFiles/minisnap_node.dir/build
-.PHONY : minisnap_node/fast
 
 #=============================================================================
 # Target rules for targets named Astar_searcher
@@ -2348,7 +2283,7 @@ rviz_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 rviz_generate_messages_nodejs/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_nodejs.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_nodejs.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_nodejs.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_nodejs.dir/build
 .PHONY : rviz_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2361,7 +2296,7 @@ rviz_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 rviz_generate_messages_py/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_py.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_py.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_py.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_py.dir/build
 .PHONY : rviz_generate_messages_py/fast
 
 #=============================================================================
@@ -2374,7 +2309,7 @@ map_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 map_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_cpp.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_cpp.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_cpp.dir/build
 .PHONY : map_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2387,7 +2322,7 @@ rviz_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 rviz_generate_messages_eus/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_eus.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_eus.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_eus.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_eus.dir/build
 .PHONY : rviz_generate_messages_eus/fast
 
 #=============================================================================
@@ -2400,7 +2335,7 @@ rviz_3d_nav_goal_tool: cmake_check_build_system
 
 # fast build rule for target.
 rviz_3d_nav_goal_tool/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool.dir/build
 .PHONY : rviz_3d_nav_goal_tool/fast
 
 #=============================================================================
@@ -2413,7 +2348,7 @@ rviz_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 rviz_generate_messages_cpp/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_cpp.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_cpp.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_cpp.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_cpp.dir/build
 .PHONY : rviz_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2426,7 +2361,7 @@ rviz_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 rviz_generate_messages_lisp/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_lisp.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_lisp.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_lisp.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_generate_messages_lisp.dir/build
 .PHONY : rviz_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2439,7 +2374,7 @@ map_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 map_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_lisp.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_lisp.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_lisp.dir/build
 .PHONY : map_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2452,7 +2387,7 @@ map_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 map_msgs_generate_messages_py/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_py.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_py.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_py.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_py.dir/build
 .PHONY : map_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -2465,7 +2400,7 @@ map_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 map_msgs_generate_messages_eus/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_eus.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_eus.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_eus.dir/build
 .PHONY : map_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -2478,7 +2413,7 @@ map_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 map_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build
 .PHONY : map_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2491,21 +2426,8 @@ rviz_3d_nav_goal_tool_autogen: cmake_check_build_system
 
 # fast build rule for target.
 rviz_3d_nav_goal_tool_autogen/fast:
-	$(MAKE) -f rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool_autogen.dir/build.make rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool_autogen.dir/build
+	$(MAKE) -f Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool_autogen.dir/build.make Utils/rviz-3d-nav-goal-tool/CMakeFiles/rviz_3d_nav_goal_tool_autogen.dir/build
 .PHONY : rviz_3d_nav_goal_tool_autogen/fast
-
-#=============================================================================
-# Target rules for targets named rviz_plugins
-
-# Build rule for target.
-rviz_plugins: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rviz_plugins
-.PHONY : rviz_plugins
-
-# fast build rule for target.
-rviz_plugins/fast:
-	$(MAKE) -f Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/build.make Utils/rviz_plugins/CMakeFiles/rviz_plugins.dir/build
-.PHONY : rviz_plugins/fast
 
 #=============================================================================
 # Target rules for targets named waypoint_generator
@@ -2610,17 +2532,12 @@ help:
 	@echo "... _quadrotor_msgs_generate_messages_check_deps_PPROutputData"
 	@echo "... _quadrotor_msgs_generate_messages_check_deps_Serial"
 	@echo "... _quadrotor_msgs_generate_messages_check_deps_PolynomialTrajectory"
-	@echo "... PID_tuning"
-	@echo "... control_node"
-	@echo "... trajec_node"
-	@echo "... circle_example"
-	@echo "... trajectory_generator"
+	@echo "... minisnap_node"
+	@echo "... minisnap"
 	@echo "... planner"
+	@echo "... planner_function_test_node"
 	@echo "... keyboard_input_node"
 	@echo "... astar_node"
-	@echo "... pub_point_node"
-	@echo "... planner_function_test_node"
-	@echo "... minisnap_node"
 	@echo "... Astar_searcher"
 	@echo "... tf_generate_messages_py"
 	@echo "... actionlib_generate_messages_py"
@@ -2712,7 +2629,6 @@ help:
 	@echo "... map_msgs_generate_messages_eus"
 	@echo "... map_msgs_generate_messages_nodejs"
 	@echo "... rviz_3d_nav_goal_tool_autogen"
-	@echo "... rviz_plugins"
 	@echo "... waypoint_generator"
 .PHONY : help
 

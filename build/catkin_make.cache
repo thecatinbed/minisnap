@@ -1,2 +1,2 @@
-Utils/cmake_utils:Utils/multi_map_server:Utils/odom_visualization:Utils/pose_utils:Utils/quadrotor_msgs:Utils/rviz_plugins:Utils/uav_utils:Utils/waypoint_generator:a_star:minisnap:px4ctrl:rviz-3d-nav-goal-tool
+Utils/cmake_utils:Utils/multi_map_server:Utils/odom_visualization:Utils/pose_utils:Utils/quadrotor_msgs:Utils/rviz-3d-nav-goal-tool:Utils/uav_utils:Utils/waypoint_generator:a_star:minisnap:px4ctrl
 -DCATKIN_DEVEL_PREFIX=/home/mm/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/mm/catkin_ws/install -G Unix Makefiles

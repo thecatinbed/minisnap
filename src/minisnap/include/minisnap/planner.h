@@ -8,7 +8,7 @@
 #include <geometry_msgs/PointStamped.h>
 #include <nav_msgs/Path.h>
 #include <quadrotor_msgs/PositionCommand.h>
-#include "minisnap/trajectory_generator.h"
+#include "minisnap/minisnap.h"
 #include <visualization_msgs/Marker.h>
 using namespace std;
 using namespace Eigen;
@@ -16,7 +16,6 @@ using namespace Eigen;
 #define JERK 3
 
 
-class  TrajectoryGeneratorTool;
 class planner
 {
     private:
@@ -35,7 +34,7 @@ class planner
         Eigen::VectorXd time_everytraj ;               //向量保存轨迹时间
         Eigen::MatrixXd poly_coeff;     //   系数矩阵     
         
-        // friend class TrajectoryGeneratorTool;   //  友元类
+        // friend class Minisnap;   //  友元类
         void getparam(void);    //获取参数
         Eigen::MatrixXd getcoeff( void);
         Eigen::Vector3d getPosPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;

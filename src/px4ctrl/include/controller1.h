@@ -72,8 +72,6 @@ public:
 	Eigen::Matrix3d Kvi;
 	Eigen::Matrix3d Ka;
     double Kyaw;
-    double dt;
-    Eigen::MatrixXd A, B, Q, N,R,K;
    
     quadrotor_msgs::Px4ctrlDebug
     update(
@@ -89,13 +87,6 @@ public:
         const Odom_Data_t &odom,
         const Imu_Data_t &imu, 
         Controller_Output_t &u);
-
-    quadrotor_msgs::Px4ctrlDebug
-    DLQR_Control(const Desired_State_t &des,
-        const Odom_Data_t &odom,
-        const Imu_Data_t &imu, 
-        Controller_Output_t &u);
-    
     
     quadrotor_msgs::Px4ctrlDebug
     update_alg1(const Desired_State_t &des,
@@ -118,13 +109,6 @@ public:
     bool almostZero(const double value) const;
 	bool almostZeroThrust(const double thrust_value) const;
     void resetThrustMapping(void);
-    void DLQR(const Eigen::MatrixXd &A, 
-    const Eigen::MatrixXd &B, const Eigen::MatrixXd &Q,
-    const Eigen::MatrixXd &R, const double tolerance,
-    const int max_num_iteration, Eigen::MatrixXd *ptr_K);
-
-    void DARE(const Eigen::MatrixXd &A, const Eigen::MatrixXd &B, const Eigen::MatrixXd &Q, const Eigen::MatrixXd &R,
-                    const Eigen::MatrixXd &N, Eigen::MatrixXd *K, const double eps);
 
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
