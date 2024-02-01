@@ -5,49 +5,6 @@ geometry_msgs::PoseStamped px4_pose;
 void pose_cb(const geometry_msgs::PoseStamped::ConstPtr &pt)
 {
     px4_pose = *pt;
-    // std::cout << "px4_pose:  " << px4_pose << std::endl;
-}
-/*
-*获取配置文件参数
-*/
-void planner::getparam(void)
-{
-    geometry_msgs::PointStamped point;
-    ros::Rate rate(10);
-    dot_num = 0;
-    XmlRpc::XmlRpcValue param_list;    //严格限定数据类型
-    XmlRpc::XmlRpcValue time_list;
-    n.getParam("pose", param_list);   //提取约束点参数
-    n.getParam("ts", time_list);    //提取时间参数
-    ros::Publisher point_pub = n.advertise<geometry_msgs::PointStamped>("/pose_point",20);
-    dot_num = param_list.size() / 3;
-    route.resize (dot_num, 3  );                           //不resize 会报错
-    for (int i = 0 ; i < param_list.size() ; i++ )
-    {
-        XmlRpc::XmlRpcValue value = param_list[i];
-        route(  i % dot_num , i / dot_num) = double(value);
-    }
-    std::cout << "route:"<< std::endl<< route << std::endl;
-    
-    n.getParam("ts", time_list);    //提取时间参数
-    time_everytraj.resize(time_list.size());      //不resize 会报错
-    for ( int i = 0 ; i < time_list.size() ; i++ )
-    {
-        XmlRpc::XmlRpcValue value = time_list[i];
-        time_everytraj( i ) = double(value);
-    }
-    for(int i = 0; i < dot_num; i++){
-        point.header.stamp = ros::Time::now();
-        point.header.frame_id = "world";
-        point.point.x = route(i, 0);
-        point.point.y = route(i, 1);
-        point.point.z = route(i, 2);
-        point_pub.publish(point);
-        rate.sleep();
-    }
-    std::cout<<"route:"<<endl<<route<<endl;
-    std::cout<<"time:"<<endl<<time_everytraj<<endl;
-    std::cout<<"dot_num:"<<endl<<dot_num<<endl;
 }
 
 /*
@@ -75,7 +32,6 @@ Eigen::Vector3d planner::getPosPoly(Eigen::MatrixXd polyCoeff, int k, double t)
 {
     Eigen::Vector3d pt;
     poly_coeff_num= 2 * mode;
-    // std::cout << "poly_coeff_num:" << poly_coeff_num << std::endl;             //正确
 
     for (int dim = 0; dim < 3; dim++) 
     {
@@ -98,7 +54,6 @@ Eigen::Vector3d planner::getPosPoly(Eigen::MatrixXd polyCoeff, int k, double t)
         pt(dim) = temp_pose;
     }
 
-    //std::cout << "pose:" << pt << std::endl;       //获取位置成功
     return pt;
 }
 /*!
@@ -112,7 +67,6 @@ Eigen::Vector3d planner::getVelPoly(Eigen::MatrixXd polyCoeff, int k, double t)
 {
     Eigen::Vector3d vt;
     poly_coeff_num= 2 * mode;
-    // std::cout << "poly_coeff_num:" << poly_coeff_num << std::endl;             //正确
 
     for (int dim = 0; dim < 3; dim++) 
     {
@@ -137,7 +91,6 @@ Eigen::Vector3d planner::getVelPoly(Eigen::MatrixXd polyCoeff, int k, double t)
         vt(dim) = temp_vel;
     }
 
-    //std::cout << "vel:" << vt << std::endl;       //获取速度成功
     return vt;
 }
 /*!
@@ -151,7 +104,6 @@ Eigen::Vector3d planner::getAccPoly(Eigen::MatrixXd polyCoeff, int k, double t)
 {
     Eigen::Vector3d acct;
     poly_coeff_num= 2 * mode;
-    // std::cout << "poly_coeff_num:" << poly_coeff_num << std::endl;             //正确
 
     for (int dim = 0; dim < 3; dim++) 
     {
@@ -176,7 +128,6 @@ Eigen::Vector3d planner::getAccPoly(Eigen::MatrixXd polyCoeff, int k, double t)
         acct(dim) = temp_acc;
     }
 
-    //std::cout << "acc:" << acct << std::endl;       //获取速度成功
     return acct;
 }
 /*!
@@ -218,15 +169,16 @@ Eigen::Vector3d planner::getJerkPoly(Eigen::MatrixXd polyCoeff, int k, double t)
     //std::cout << "jerk:" << jerkt << std::endl;       //获取速度成功
     return jerkt;
 }
-
+/*!
+ * 获得离散化后的轨迹点
+ */
 std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
 {
     std::vector<quadrotor_msgs::PositionCommand> trajectory_vector;
     quadrotor_msgs::PositionCommand trajectory;
     ros::Publisher tra_generation_pub = n.advertise<quadrotor_msgs::PositionCommand>("/planning/pos_cmd", 10);
-    //ros::Publisher realpath_pub = n.advertise<nav_msgs::Path>("/real_trajectory", 10);
 
-    Vector3d pos_;             //用于获取getPosPoly返回的向量，转化为pose信息
+    Vector3d pos_;             
     Vector3d vel_;
     Vector3d acc_;
     Vector3d jerk_;
@@ -244,12 +196,10 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
     ros::Rate rate(100);
     ros::Time cur_time = ros::Time::now();
     trajectory.header.stamp = cur_time;
-    //cout << "time_size:" << time_everytraj.size()<< endl;
+
     for (int i = 0; i < time_everytraj.size(); i++) 
     {
-        
         offset.fromSec(time_everytraj(i));
-        //cout << "time(i):" << time_everytraj(i)<< endl;
         for (double t = 0.0; t < time_everytraj(i); t += 0.01) 
         {
             
@@ -258,6 +208,7 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
             vel_ = getVelPoly(poly_coeff, i, t);
             acc_ = getAccPoly(poly_coeff, i ,t);
             jerk_ = getJerkPoly(poly_coeff, i ,t);
+
             trajectory.position.x = pos_(0);
             trajectory.position.y = pos_(1);
             trajectory.position.z = pos_(2);
@@ -276,28 +227,23 @@ std::vector<quadrotor_msgs::PositionCommand> planner::get_trajectory(void)
 
             trajectory.yaw = 0;
             trajectory.yaw_dot = 0;
-            //将轨迹压入到容器当中
-            //tra_generation_pub.publish(trajectory);
-            //cout << trajectory << endl;
-            // cout << "positon:" << trajectory.position << endl;
-            // cout << "velocity:" << trajectory.velocity << endl;
             trajectory_vector.push_back(trajectory);
         }
         trajectory.header.stamp = trajectory.header.stamp + offset;
         trajectory.trajectory_id = trajectory.trajectory_id + 1;   
     }   
-    
-    //ros::Duration(1).sleep();     
-    // cout << "trajectory:" << trajectory << endl;
-    //return trajectory;              //  返回产生的 path 信息
     return trajectory_vector;
 }
+/*!
+ * 通过path形式显示轨迹
+ * @param despath_pub nav_msgs::Path数据类型的发布者
+ * @return null
+ */
 void planner::draw_desire_trajectory(ros::Publisher despath_pub){
     static nav_msgs::Path desire_path;
     geometry_msgs::PoseStamped pose;
     Vector3d pos_;
     ROS_INFO("Drawing desire trajectory.");
-    //ros::Publisher despath_pub = n.advertise<nav_msgs::Path>("/desire_trajectory", 10, true);
     ros::Duration(2.0).sleep();
     
     desire_path.header.frame_id = "world";
@@ -319,11 +265,15 @@ void planner::draw_desire_trajectory(ros::Publisher despath_pub){
             desire_path.poses.push_back(pose); 
         }  
     }
-    //std::cout<< desire_path << endl;
     despath_pub.publish(desire_path); 
     
     ROS_INFO("Desire trajectory was drawn.");
 }
+/*!
+ * 通过marker形式显示轨迹
+ * @param despath_pub isulisations_msgs::marker数据类型的发布者
+ * @return null
+ */
 void planner::draw_desire_trajectory_marker(ros::Publisher despath_pub){
     Vector3d pos_;
     geometry_msgs::Point point;
@@ -363,36 +313,6 @@ void planner::draw_desire_trajectory_marker(ros::Publisher despath_pub){
     despath_pub.publish(marker);
     ROS_INFO("Desire trajectory was drawn.");
 }
-/*
-*轨迹发布
-*/
 
-void planner::tra_publish(void)
-{
-    ros::Publisher tra_generation_pub = n.advertise<quadrotor_msgs::PositionCommand>("/planning/pos_cmd", 10); 
-    ros::Publisher real_trajectory_pub = n.advertise<nav_msgs::Path>("/real_trajectory", 10, true); 
-    ros::Subscriber pose_sub = n.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 10, pose_cb);
-
-    nav_msgs::Path real_path;
-    geometry_msgs::PoseStamped pose;
-
-    std::vector<quadrotor_msgs::PositionCommand> tra;
-    tra = get_trajectory();   // 获取轨迹path
-    ros::Rate rate(100);  //设置发布频率
-    real_path.header.frame_id = "world";
-    real_path.header.stamp = ros::Time::now();
-    real_path.poses.clear();
-
-    for(std::vector<quadrotor_msgs::PositionCommand>::iterator it = tra.begin(); it != tra.end(); ++it){
-        tra_generation_pub.publish(*it);
-        pose.pose.position.x = px4_pose.pose.position.x;
-        pose.pose.position.y = px4_pose.pose.position.y;
-        pose.pose.position.z = px4_pose.pose.position.z;
-        real_path.poses.push_back(pose);
-        real_trajectory_pub.publish(real_path);
-        rate.sleep();
-        ros::spinOnce();
-    }
-}
 
 

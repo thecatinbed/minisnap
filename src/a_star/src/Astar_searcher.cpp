@@ -6,14 +6,12 @@ using namespace Eigen;
 //TODO 1算法初始化
 std::function<double(Eigen::Vector3d, Eigen::Vector3d)>Distance;
 
-/***
- *@函数功能   计算两节点间的欧式距离
- ------------------------------------------------
- *@参数       node1_coord    节点1
- *@参数       node2_coord    节点2
- ------------------------------------------------
- *@返回值     欧式距离值：根号√((x2-x1)^2+(y2-y1)^2)
- */
+/*
+* @function 计算两节点间的欧式距离
+* @param    node1_coord 节点1
+* @param    node2_coord 节点2
+* @return   欧式距离值：根号√((x2-x1)^2+(y2-y1)^2)
+*/
 double EuclideanDistance(Eigen::Vector3d node1_coord,Eigen::Vector3d node2_coord)
 {
     double h= std::sqrt(std::pow((node1_coord(0) - node2_coord(0)), 2 ) +
@@ -22,13 +20,11 @@ double EuclideanDistance(Eigen::Vector3d node1_coord,Eigen::Vector3d node2_coord
     return h;
 }
 
-/***
-*@函数功能   计算两点间的曼哈顿距离
-------------------------------------------------
-*@参数       node1_coord    节点1
-*@参数       node2_coord    节点2
-------------------------------------------------
-*@返回值    曼哈顿距离值：|(x2-x1)+(y2-y1)|
+/*
+* @function 计算两点间的曼哈顿距离
+* @param    node1_coord 节点1
+* @param    node2_coord 节点2
+* @return   曼哈顿距离值：|(x2-x1)+(y2-y1)|
 */
 double ManhattanDistance(Eigen::Vector3d node1_coord,Eigen::Vector3d node2_coord)
 {
@@ -38,12 +34,12 @@ double ManhattanDistance(Eigen::Vector3d node1_coord,Eigen::Vector3d node2_coord
     return h;
 }
 
-/****************构造函数*****************/
 /*
-参数：
-_distance   Astar算法的启发距离函数
-_weight_a   Astar算法的权重a
-_weight_b   Astar算法的权重a
+* @function 构造函数
+* @param    _distance Astar算法的启发距离函数
+* @param    _weight_a Astar算法的权重a
+* @param    _weight_b Astar算法的权重b
+* @return   曼哈顿距离值：|(x2-x1)+(y2-y1)|
 */
 AstarPathFinder::AstarPathFinder(std::string _distance,double _weight_a,double _weight_b):distance(_distance),weight_a(_weight_a),weight_b(_weight_b)        
 {
@@ -62,15 +58,15 @@ AstarPathFinder::AstarPathFinder(std::string _distance,double _weight_a,double _
 
 
 //TODO 2地图相关操作
-/****************初始化点云地图*****************/
 /*
-参数：
-_resolution    分辨率
-global_xyz_l   世界坐标系下点云地图三轴最小尺寸
-global_xyz_u   世界坐标系下点云地图三轴最小尺寸
-max_x_id       栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的宽
-max_y_id       栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的长
-max_z_id       栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的高
+* @function 初始化点云地图
+* @param    _resolution 分辨率
+* @param    global_xyz_l 世界坐标系下点云地图三轴最小尺寸
+* @param    global_xyz_u 世界坐标系下点云地图三轴最小尺寸
+* @param    max_x_id 栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的宽
+* @param    max_y_id 栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的长
+* @param    max_z_id 栅格坐标系(与世界坐标系相差分辨率)下，整个点云地图的高
+* @return   null
 */
 void AstarPathFinder::initGridMap(double _resolution, Vector3d global_xyz_l, Vector3d global_xyz_u, int max_x_id, int max_y_id, int max_z_id)
 {   
@@ -130,12 +126,12 @@ void AstarPathFinder::initGridMap(double _resolution, Vector3d global_xyz_l, Vec
 */
 }
 
-/****************设置一维点云数据格式中的障碍物的位置*****************/
 /*
-参数：
-coord_x       世界坐标系下，某个障碍物点云的x值
-coord_y       世界坐标系下，某个障碍物点云的y值
-coord_z       世界坐标系下，某个障碍物点云的z值
+* @function 设置一维点云数据格式中的障碍物的位置
+* @param    coord_x 世界坐标系下，某个障碍物点云的x值
+* @param    coord_y 世界坐标系下，某个障碍物点云的y值
+* @param    coord_z 世界坐标系下，某个障碍物点云的z值
+* @return   null
 */
 void AstarPathFinder::setObs(const double coord_x, const double coord_y, const double coord_z)
 {   
@@ -151,11 +147,10 @@ void AstarPathFinder::setObs(const double coord_x, const double coord_y, const d
     data[idx_x * GLYZ_SIZE + idx_y * GLZ_SIZE + idx_z] = 1;
 }
 
-/****************栅格转世界*****************/
 /*
-参数：
-index    栅格索引
-返回值：  该栅格所定应的世界坐标系下点云位置坐标
+* @function 栅格坐标转世界坐标
+* @param    index 栅格索引
+* @return   该栅格所定应的世界坐标系下点云位置坐标
 */
 Vector3d AstarPathFinder::gridIndex2coord(const Vector3i & index) 
 {
@@ -168,11 +163,10 @@ Vector3d AstarPathFinder::gridIndex2coord(const Vector3i & index)
     return pt;
 }
 
-/****************世界转栅格*****************/
 /*
-参数：
-pt       世界坐标系下点云索引
-返回值：  对应的栅格坐标系的栅格索引
+* @function 世界坐标转栅格坐标
+* @param    pt 世界坐标系下点云坐标
+* @return   对应的栅格坐标系的栅格索引
 */
 Vector3i AstarPathFinder::coord2gridIndex(const Vector3d & pt) 
 {
@@ -188,7 +182,11 @@ Vector3i AstarPathFinder::coord2gridIndex(const Vector3d & pt)
   
     return idx;
 }
-
+/*
+* @function 正则化世界坐标系下的点
+* @param    pt 世界坐标系下点云坐标
+* @return   正则化后的点
+*/
 Eigen::Vector3d AstarPathFinder::coordRounding(const Eigen::Vector3d & coord)
 {
     return gridIndex2coord(coord2gridIndex(coord));
@@ -196,11 +194,11 @@ Eigen::Vector3d AstarPathFinder::coordRounding(const Eigen::Vector3d & coord)
 
 
 //TODO 3 Astar本体实现
-/****************Astar的核心函数*****************/
 /*
-参数：
-start_pt   世界坐标系下点云中起点位置
-end_pt     世界坐标系下点云中终点位置
+* @function Astar的核心函数
+* @param    start_pt 世界坐标系下点云中起点位置
+* @param    end_pt 世界坐标系下点云中终点位置
+* @return   正则化后的点
 */
 void AstarPathFinder::AstarGraphSearch(Vector3d start_pt, Vector3d end_pt)
 {   
@@ -305,19 +303,18 @@ void AstarPathFinder::AstarGraphSearch(Vector3d start_pt, Vector3d end_pt)
         ROS_WARN("Time consume in Astar path finding is %f", (time_2 - time_1).toSec() );
 }
 
-/****************计算Astar的启发式H值*****************/
 /*
-参数：
-node1     世界坐标系下点云中点1的指针对象
-node2     世界坐标系下点云中点2的指针对象
-返回值：   世界坐标系下两点之间的H值
+* @function 计算Astar的启发式H值
+* @param    node1 世界坐标系下点云中点1的指针对象
+* @param    node2 世界坐标系下点云中点2的指针对象
+* @return   世界坐标系下两点之间的H值
 */
 double AstarPathFinder::calHeu(GridNodePtr node1, GridNodePtr node2)
 {
     double h;
     Eigen::Vector3d node1_coord = node1->coord;
     Eigen::Vector3d node2_coord = node2->coord;
-    h=Distance(node1_coord,node2_coord);
+    h = Distance(node1_coord,node2_coord);
 
     // if (distance=="euclidean")
     // {
@@ -335,11 +332,11 @@ double AstarPathFinder::calHeu(GridNodePtr node1, GridNodePtr node2)
     return h;
 }
 
-/****************寻找Astar中该点的邻居点集*****************/
 /*
-参数：
-neighborPtrSets  合适邻居节点
-edgeCostSets     该邻居点与当前点之间的代价值（欧式距离）
+* @function 寻找Astar中该点的邻居点集
+* @param    neighborPtrSets 合适邻居节点
+* @param    edgeCostSets 该邻居点与当前点之间的代价值（欧式距离）
+* @return   null
 */
 inline void AstarPathFinder::AstarGetSucc(GridNodePtr currentPtr, vector<GridNodePtr> & neighborPtrSets, vector<double> & edgeCostSets)
 {   
@@ -411,13 +408,12 @@ inline void AstarPathFinder::AstarGetSucc(GridNodePtr currentPtr, vector<GridNod
     }
 }
 
-/****************障碍物判断*****************/
 /*
-参数：
-idx_x    栅格坐标系下某点的x值
-idx_y    栅格坐标系下某点的y值
-idx_z    栅格坐标系下某点的z值
-返回值：  true是障碍物  false不是障碍物
+* @function 判断该点是否为障碍物
+* @param    idx_x 栅格坐标系下某点的x值
+* @param    idx_y 栅格坐标系下某点的y值
+* @param    idx_z 栅格坐标系下某点的z值
+* @return   bool类型，true是障碍物
 */
 inline bool AstarPathFinder::isOccupied(const int & idx_x, const int & idx_y, const int & idx_z) const 
 {
@@ -425,7 +421,11 @@ inline bool AstarPathFinder::isOccupied(const int & idx_x, const int & idx_y, co
             (data[idx_x * GLYZ_SIZE + idx_y * GLZ_SIZE + idx_z] == 1));
 }
 
-/****************获取Astar的路径*****************/
+/*
+* @function 获取Astar的路径点
+* @param    null
+* @return   路径点组成的vector
+*/
 vector<Vector3d> AstarPathFinder::getPath() 
 {   
     vector<Vector3d> path;
@@ -448,7 +448,11 @@ vector<Vector3d> AstarPathFinder::getPath()
     return path;
 }
 
-/****************获取closelist中点的世界坐标下的索引*****************/
+/*
+* @function 获取closelist中点的世界坐标下的索引
+* @param    null
+* @return   vector类型
+*/
 vector<Vector3d> AstarPathFinder::getVisitedNodes()
 {   
     vector<Vector3d> visited_nodes;
@@ -464,7 +468,11 @@ vector<Vector3d> AstarPathFinder::getVisitedNodes()
     return visited_nodes;
 }
 
-/****************Astar节点重置*****************/
+/*
+* @function Astar单个节点重置
+* @param    ptr 需要重置的节点
+* @return   null
+*/
 void AstarPathFinder::resetGrid(GridNodePtr ptr)
 {
     ptr->id = 0;
@@ -472,6 +480,11 @@ void AstarPathFinder::resetGrid(GridNodePtr ptr)
     ptr->gScore = inf;
     ptr->fScore = inf;
 }
+/*
+* @function 重置所有节点数据
+* @param    null
+* @return   null
+*/
 void AstarPathFinder::resetUsedGrids()
 {   
     for(int i=0; i < GLX_SIZE ; i++)
@@ -479,7 +492,11 @@ void AstarPathFinder::resetUsedGrids()
             for(int k=0; k < GLZ_SIZE ; k++)
                 resetGrid(GridNodeMap[i][j][k]);
 }
-
+/*
+* @function 判断一点是否可达
+* @param    coord 该点的世界系坐标
+* @return   bool类型，true为可达  
+*/
 bool AstarPathFinder::isReachable(const Eigen::Vector3d & coord){
     Eigen::Vector3i index = coord2gridIndex(coord);
     return !(isOccupied(index(0),index(1),index(2)));

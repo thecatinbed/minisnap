@@ -32,10 +32,6 @@ int main(int argc, char** argv)
     {
       takeoffComplete = true;
       ROS_INFO("识别到 takeoff 命令");
-      // geometry_msgs::Point startPoint;
-      // startPoint.x = 0;
-      // startPoint.y = 0;
-      // startPoint.z = 2;
       std_msgs::Bool takeoffcmd;
       takeoffcmd.data = true;
       takeoff_pub.publish(takeoffcmd);
@@ -52,11 +48,6 @@ int main(int argc, char** argv)
         takeoff_pub.publish(takeoffcmd);
         takeoffComplete = false;
       }
-      // geometry_msgs::Point startPoint;
-      // startPoint.x = 0;
-      // startPoint.y = 0;
-      // startPoint.z = 0;
-      // goalPoint_pub.publish(startPoint);
     }
     else if (std::regex_match(input, match, coordinate_pattern))
     {

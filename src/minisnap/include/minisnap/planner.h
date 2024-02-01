@@ -35,16 +35,14 @@ class planner
         Eigen::MatrixXd poly_coeff;     //   系数矩阵     
         
         // friend class Minisnap;   //  友元类
-        void getparam(void);    //获取参数
-        Eigen::MatrixXd getcoeff( void);
+        Eigen::MatrixXd getcoeff( void);    
         Eigen::Vector3d getPosPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;
         Eigen::Vector3d getVelPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;
         Eigen::Vector3d getAccPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;
         Eigen::Vector3d getJerkPoly(Eigen::MatrixXd polyCoeff, int k, double t) ;
         std::vector<quadrotor_msgs::PositionCommand> get_trajectory(void);
-        void tra_publish(void);
-        void draw_desire_trajectory(ros::Publisher despath_pub);
-        void draw_desire_trajectory_marker(ros::Publisher despath_pub);
+        void draw_desire_trajectory(ros::Publisher despath_pub);                //在rviz中以marker形式显示期望轨迹
+        void draw_desire_trajectory_marker(ros::Publisher despath_pub);           //在rviz中以path形式显示期望轨迹
 };
 
 // #endif

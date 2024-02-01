@@ -14,7 +14,7 @@ int main(int argc, char** argv){
     coeff(0,5) = 1;
     coeff(0,6) = 1;
     coeff(0,7) = 1;
-    Vector3d pos_ = myplanner.getPosPoly(coeff,0,1);
+    Vector3d pos_ = myplanner.getPosPoly(coeff,0,1);        //testing the function of get derivative
     Vector3d vel_ = myplanner.getVelPoly(coeff,0,1);
     Vector3d acc_ = myplanner.getAccPoly(coeff,0,1);
     Vector3d jerk_ = myplanner.getJerkPoly(coeff,0,1);
